@@ -12,6 +12,13 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $categories = [
+            'Elektronik',
+            'Furniture',
+            'ATK',
+            'Alat Laboratorium',
+            'Alat Olahraga',
+            'Alat Kebersihan'
+        ];
     }
 }
