@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
+            
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
+            $table->foreignId('room_id')->constrained()->onDelete('cascade');
+            
+            $table->string('code')->unique();
+            $table->string('name');
+            $table->string('brand')->nullable();
+            $table->date('purchase_date');
+            
+            $table->enum('condition', ['bagus', 'rusak ringan','rusak sedang', 'rusak berat','hilang','diperbaiki'])->default('bagus');
             $table->timestamps();
         });
     }
