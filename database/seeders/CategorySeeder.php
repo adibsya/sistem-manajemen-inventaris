@@ -20,5 +20,8 @@ class CategorySeeder extends Seeder
             'Alat Olahraga',
             'Alat Kebersihan'
         ];
+        foreach ($categories as $category) {
+            \App\Models\Category::create(['name' => $category]);
+        }
     }
 }
