@@ -22,7 +22,7 @@ class CategorySeeder extends Seeder
             'Alat Kebersihan'
         ];
         foreach ($categories as $category) {
-            \App\Models\Category::create(['name' => $category]);
+            Category::create(['name' => $category]);
         }
     }
 }

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Room;
 
 class RoomSeeder extends Seeder
 {
@@ -26,7 +27,7 @@ class RoomSeeder extends Seeder
             'Gudang',
         ];
         foreach ($rooms as $room) {
-            \App\Models\Room::create(['name' => $room]);
+            Room::create(['name' => $room]);
         }
     }
 }
