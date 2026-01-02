@@ -15,6 +15,26 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    
+                    <x-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.*')">
+                        {{ __('Assets') }}
+                    </x-nav-link>
+                    
+                    <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
+                        {{ __('Kategori') }}
+                    </x-nav-link>
+                    
+                    <x-nav-link :href="route('rooms.index')" :active="request()->routeIs('rooms.*')">
+                        {{ __('Ruangan') }}
+                    </x-nav-link>
+                    
+                    <x-nav-link :href="route('damage-reports.index')" :active="request()->routeIs('damage-reports.*')">
+                        {{ __('Laporan') }}
+                    </x-nav-link>
+                    
+                    <x-nav-link :href="route('maintenance-logs.index')" :active="request()->routeIs('maintenance-logs.*')">
+                        {{ __('Perbaikan') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -70,6 +90,26 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            
+            <x-responsive-nav-link :href="route('assets.index')" :active="request()->routeIs('assets.*')">
+                {{ __('Assets') }}
+            </x-responsive-nav-link>
+            
+            <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
+                {{ __('Kategori') }}
+            </x-responsive-nav-link>
+            
+            <x-responsive-nav-link :href="route('rooms.index')" :active="request()->routeIs('rooms.*')">
+                {{ __('Ruangan') }}
+            </x-responsive-nav-link>
+            
+            <x-responsive-nav-link :href="route('damage-reports.index')" :active="request()->routeIs('damage-reports.*')">
+                {{ __('Laporan Kerusakan') }}
+            </x-responsive-nav-link>
+            
+            <x-responsive-nav-link :href="route('maintenance-logs.index')" :active="request()->routeIs('maintenance-logs.*')">
+                {{ __('Riwayat Perbaikan') }}
+            </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->
@@ -98,3 +138,4 @@
         </div>
     </div>
 </nav>
+
