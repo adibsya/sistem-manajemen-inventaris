@@ -12,6 +12,11 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+    // Konstanta Role
+    const ROLE_ADMIN = 'admin';
+    const ROLE_STAFF = 'staff';
+    const ROLE_TEKNISI = 'teknisi';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -46,4 +51,45 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // =====================================
+    // HELPER METHODS UNTUK CEK ROLE
+    // =====================================
+
+    /**
+     * Cek apakah user adalah admin
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    /**
+     * Cek apakah user adalah staff
+     */
+    public function isStaff(): bool
+    {
+        return $this->role === self::ROLE_STAFF;
+    }
+
+    /**
+     * Cek apakah user adalah teknisi
+     */
+    public function isTeknisi(): bool
+    {
+        return $this->role === self::ROLE_TEKNISI;
+    }
+
+    /**
+     * Cek apakah user memiliki salah satu role yang diberikan
+     */
+    public function hasRole(string|array $roles): bool
+    {
+        if (is_string($roles)) {
+            return $this->role === $roles;
+        }
+
+        return in_array($this->role, $roles);
+    }
 }
+
