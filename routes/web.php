@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // =============================================
-    // ROUTES - Sistem Manajemen Inventaris
+    // ADMIN ONLY - User Management
     // =============================================
     Route::middleware('role:admin')->group(function () {
         Route::resource('users', UserController::class);
@@ -77,8 +77,16 @@ Route::middleware('auth')->group(function () {
         
         // Maintenance Logs - Full access
         Route::resource('maintenance-logs', MaintenanceLogController::class);
+        
+        // =============================================
+        // EXPORT PDF ROUTES
+        // =============================================
+        Route::get('assets/export/pdf', [AssetController::class, 'exportPdf'])->name('assets.export.pdf');
+        Route::get('damage-reports/export/pdf', [DamageReportController::class, 'exportPdf'])->name('damage-reports.export.pdf');
+        Route::get('maintenance-logs/export/pdf', [MaintenanceLogController::class, 'exportPdf'])->name('maintenance-logs.export.pdf');
     });
 });
 
 require __DIR__.'/auth.php';
+
 

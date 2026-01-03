@@ -8,6 +8,7 @@ use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AssetController extends Controller
 {
@@ -175,5 +176,35 @@ class AssetController extends Controller
         return redirect()->route('assets.index')
             ->with('success', 'Asset berhasil dihapus!');
     }
+
+    /**
+     * Export daftar asset ke PDF
+     */
+    public function exportPdf(Request $request)
+    {
+        $query = Asset::with(['category', 'room']);
+
+        // Apply filters jika ada
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+        if ($request->filled('room_id')) {
+            $query->where('room_id', $request->room_id);
+        }
+        if ($request->filled('condition')) {
+            $query->where('condition', $request->condition);
+        }
+
+        $assets = $query->orderBy('name')->get();
+
+        $pdf = Pdf::loadView('exports.assets-pdf', [
+            'assets' => $assets,
+            'title' => 'Laporan Data Asset',
+            'date' => now()->format('d F Y'),
+        ]);
+
+        return $pdf->download('laporan-asset-' . now()->format('Y-m-d') . '.pdf');
+    }
 }
+
 
