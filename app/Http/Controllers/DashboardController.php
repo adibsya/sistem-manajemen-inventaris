@@ -15,7 +15,7 @@ class DashboardController extends Controller
     {
         // Statistik Asset
         $totalAssets = Asset::count();
-        $assetsByCondition = Asset::selectRaw('condition, COUNT(*) as count')
+        $assetsByCondition = Asset::selectRaw('`condition`, COUNT(*) as count')
             ->groupBy('condition')
             ->pluck('count', 'condition')
             ->toArray();
