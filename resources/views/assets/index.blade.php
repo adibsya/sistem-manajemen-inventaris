@@ -4,10 +4,18 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Daftar Asset') }}
             </h2>
-            <a href="{{ route('assets.create') }}" 
-               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                + Tambah Asset
-            </a>
+            <div class="flex gap-2">
+                @if(Auth::user()->isAdmin() || Auth::user()->isTeknisi())
+                    <a href="{{ route('assets.export.pdf', request()->query()) }}" 
+                       class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                        📄 Export PDF
+                    </a>
+                    <a href="{{ route('assets.create') }}" 
+                       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        + Tambah Asset
+                    </a>
+                @endif
+            </div>
         </div>
     </x-slot>
 

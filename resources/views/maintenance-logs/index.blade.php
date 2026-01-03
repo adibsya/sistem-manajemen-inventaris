@@ -4,10 +4,16 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Riwayat Perbaikan') }}
             </h2>
-            <a href="{{ route('maintenance-logs.create') }}" 
-               class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                + Tambah Riwayat
-            </a>
+            <div class="flex gap-2">
+                <a href="{{ route('maintenance-logs.export.pdf', request()->query()) }}" 
+                   class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    📄 Export PDF
+                </a>
+                <a href="{{ route('maintenance-logs.create') }}" 
+                   class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                    + Tambah Riwayat
+                </a>
+            </div>
         </div>
     </x-slot>
 

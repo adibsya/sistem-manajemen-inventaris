@@ -4,10 +4,18 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Laporan Kerusakan') }}
             </h2>
-            <a href="{{ route('damage-reports.create') }}" 
-               class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                + Buat Laporan
-            </a>
+            <div class="flex gap-2">
+                @if(Auth::user()->isAdmin() || Auth::user()->isTeknisi())
+                    <a href="{{ route('damage-reports.export.pdf', request()->query()) }}" 
+                       class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                        📄 Export PDF
+                    </a>
+                @endif
+                <a href="{{ route('damage-reports.create') }}" 
+                   class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                    + Buat Laporan
+                </a>
+            </div>
         </div>
     </x-slot>
 
