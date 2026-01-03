@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // =============================================
-    // ADMIN ONLY - User Management
+    // ROUTES - Sistem Manajemen Inventaris
     // =============================================
     Route::middleware('role:admin')->group(function () {
         Route::resource('users', UserController::class);
