@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // =============================================
-    // RESOURCE ROUTES - Sistem Manajemen Inventaris
+    // ROUTES - Sistem Manajemen Inventaris
     // =============================================
     
     // Assets - Kelola data barang inventaris
