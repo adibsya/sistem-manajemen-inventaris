@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RoomController;
@@ -24,23 +25,60 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // =============================================
-    // RESOURCE ROUTES - Sistem Manajemen Inventaris
+    // ADMIN ONLY - User Management
     // =============================================
+    Route::middleware('role:admin')->group(function () {
+        Route::resource('users', UserController::class);
+    });
+
+    // =============================================
+    // ADMIN & TEKNISI - Kelola Master Data
+    // =============================================
+    Route::middleware('role:admin,teknisi')->group(function () {
+        // Categories - Kelola kategori barang
+        Route::resource('categories', CategoryController::class)->except(['index', 'show']);
+        
+        // Rooms - Kelola data ruangan
+        Route::resource('rooms', RoomController::class)->except(['index', 'show']);
+        
+        // Assets - Kelola data barang (create, edit, delete)
+        Route::resource('assets', AssetController::class)->except(['index', 'show']);
+    });
+
+    // =============================================
+    // SEMUA USER YANG LOGIN - Lihat Data
+    // =============================================
+    // Semua user bisa melihat daftar dan detail
+    Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('categories/{category}', [CategoryController::class, 'show'])->name('categories.show');
     
-    // Assets - Kelola data barang inventaris
-    Route::resource('assets', AssetController::class);
+    Route::get('rooms', [RoomController::class, 'index'])->name('rooms.index');
+    Route::get('rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
     
-    // Categories - Kelola kategori barang (Komputer, Meja, dll)
-    Route::resource('categories', CategoryController::class);
-    
-    // Rooms - Kelola data ruangan
-    Route::resource('rooms', RoomController::class);
-    
-    // Damage Reports - Laporan kerusakan barang
-    Route::resource('damage-reports', DamageReportController::class);
-    
-    // Maintenance Logs - Riwayat perbaikan barang
-    Route::resource('maintenance-logs', MaintenanceLogController::class);
+    Route::get('assets', [AssetController::class, 'index'])->name('assets.index');
+    Route::get('assets/{asset}', [AssetController::class, 'show'])->name('assets.show');
+
+    // =============================================
+    // SEMUA USER - Laporan Kerusakan (Create, View)
+    // =============================================
+    Route::get('damage-reports', [DamageReportController::class, 'index'])->name('damage-reports.index');
+    Route::get('damage-reports/create', [DamageReportController::class, 'create'])->name('damage-reports.create');
+    Route::post('damage-reports', [DamageReportController::class, 'store'])->name('damage-reports.store');
+    Route::get('damage-reports/{damage_report}', [DamageReportController::class, 'show'])->name('damage-reports.show');
+
+    // =============================================
+    // ADMIN & TEKNISI - Update/Hapus Laporan & Perbaikan
+    // =============================================
+    Route::middleware('role:admin,teknisi')->group(function () {
+        // Edit dan hapus laporan kerusakan
+        Route::get('damage-reports/{damage_report}/edit', [DamageReportController::class, 'edit'])->name('damage-reports.edit');
+        Route::put('damage-reports/{damage_report}', [DamageReportController::class, 'update'])->name('damage-reports.update');
+        Route::delete('damage-reports/{damage_report}', [DamageReportController::class, 'destroy'])->name('damage-reports.destroy');
+        
+        // Maintenance Logs - Full access
+        Route::resource('maintenance-logs', MaintenanceLogController::class);
+    });
 });
 
 require __DIR__.'/auth.php';
+
