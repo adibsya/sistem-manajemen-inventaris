@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     
-                    <form action="{{ route('damage-reports.update', $damageReport) }}" method="POST">
+                    <form action="{{ route('damage-reports.update', $damageReport) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         
@@ -50,19 +50,55 @@
                             @enderror
                         </div>
 
-                        {{-- URL Foto (opsional) --}}
+                        {{-- Foto Bukti --}}
                         <div class="mb-4">
                             <label for="photo_evidence" class="block text-sm font-medium text-gray-700 mb-2">
-                                URL Foto Bukti (opsional)
+                                Foto Bukti Kerusakan
                             </label>
-                            <input type="text" 
-                                   name="photo_evidence" 
-                                   id="photo_evidence"
-                                   value="{{ old('photo_evidence', $damageReport->photo_evidence) }}"
-                                   class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                            
+                            {{-- Foto existing --}}
+                            @if($damageReport->photo_evidence)
+                                <div class="mb-3 p-3 bg-gray-50 rounded-lg" id="current-photo">
+                                    <p class="text-sm text-gray-600 mb-2">Foto saat ini:</p>
+                                    <img src="{{ asset('storage/' . $damageReport->photo_evidence) }}" 
+                                         alt="Foto bukti" 
+                                         class="max-w-xs max-h-48 rounded-lg border">
+                                    <div class="mt-2">
+                                        <label class="inline-flex items-center">
+                                            <input type="checkbox" name="remove_photo" value="1" 
+                                                   class="rounded border-gray-300 text-red-600 focus:ring-red-500"
+                                                   onchange="togglePhotoSection(this)">
+                                            <span class="ml-2 text-sm text-red-600">Hapus foto ini</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            @endif
+                            
+                            {{-- Upload foto baru --}}
+                            <div id="new-photo-section">
+                                <input type="file" 
+                                       name="photo_evidence" 
+                                       id="photo_evidence"
+                                       accept="image/jpeg,image/png,image/jpg,image/gif"
+                                       class="w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-blue-500 focus:ring-blue-500"
+                                       onchange="previewImage(this)">
+                                <p class="text-sm text-gray-500 mt-1">
+                                    @if($damageReport->photo_evidence)
+                                        Upload foto baru untuk mengganti foto lama. 
+                                    @endif
+                                    Format: JPEG, PNG, JPG, GIF. Maks: 2MB
+                                </p>
+                            </div>
+                            
                             @error('photo_evidence')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
+                            
+                            {{-- Preview foto baru --}}
+                            <div id="image-preview" class="mt-3 hidden">
+                                <p class="text-sm text-gray-600 mb-2">Preview foto baru:</p>
+                                <img id="preview" src="" alt="Preview" class="max-w-xs max-h-48 rounded-lg border">
+                            </div>
                         </div>
 
                         {{-- Status (untuk admin/teknisi) --}}
@@ -104,4 +140,32 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function previewImage(input) {
+            const preview = document.getElementById('preview');
+            const previewContainer = document.getElementById('image-preview');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    previewContainer.classList.remove('hidden');
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                previewContainer.classList.add('hidden');
+            }
+        }
+
+        function togglePhotoSection(checkbox) {
+            const currentPhoto = document.getElementById('current-photo');
+            if (checkbox.checked) {
+                currentPhoto.classList.add('opacity-50');
+            } else {
+                currentPhoto.classList.remove('opacity-50');
+            }
+        }
+    </script>
 </x-app-layout>
+

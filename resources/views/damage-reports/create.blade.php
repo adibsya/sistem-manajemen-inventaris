@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     
-                    <form action="{{ route('damage-reports.store') }}" method="POST">
+                    <form action="{{ route('damage-reports.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         
                         {{-- Pilih Asset --}}
@@ -50,20 +50,27 @@
                             @enderror
                         </div>
 
-                        {{-- URL Foto (opsional) --}}
+                        {{-- Upload Foto Bukti --}}
                         <div class="mb-4">
                             <label for="photo_evidence" class="block text-sm font-medium text-gray-700 mb-2">
-                                URL Foto Bukti (opsional)
+                                Foto Bukti Kerusakan (opsional)
                             </label>
-                            <input type="text" 
+                            <input type="file" 
                                    name="photo_evidence" 
                                    id="photo_evidence"
-                                   value="{{ old('photo_evidence') }}"
-                                   class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                                   placeholder="https://example.com/foto.jpg">
+                                   accept="image/jpeg,image/png,image/jpg,image/gif"
+                                   class="w-full border border-gray-300 rounded-md shadow-sm p-2 focus:border-blue-500 focus:ring-blue-500"
+                                   onchange="previewImage(this)">
+                            <p class="text-sm text-gray-500 mt-1">Format: JPEG, PNG, JPG, GIF. Maks: 2MB</p>
                             @error('photo_evidence')
                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                             @enderror
+                            
+                            {{-- Preview gambar --}}
+                            <div id="image-preview" class="mt-3 hidden">
+                                <p class="text-sm text-gray-600 mb-2">Preview:</p>
+                                <img id="preview" src="" alt="Preview" class="max-w-xs max-h-48 rounded-lg border">
+                            </div>
                         </div>
 
                         <div class="flex items-center gap-4">
@@ -79,4 +86,23 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function previewImage(input) {
+            const preview = document.getElementById('preview');
+            const previewContainer = document.getElementById('image-preview');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    previewContainer.classList.remove('hidden');
+                }
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                previewContainer.classList.add('hidden');
+            }
+        }
+    </script>
 </x-app-layout>
+

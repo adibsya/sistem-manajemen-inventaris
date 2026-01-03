@@ -48,10 +48,13 @@
 
                     @if($damageReport->photo_evidence)
                         <div class="mb-6">
-                            <p class="text-sm text-gray-500 mb-2">Foto Bukti</p>
-                            <a href="{{ $damageReport->photo_evidence }}" target="_blank" class="text-blue-600 hover:underline">
-                                {{ $damageReport->photo_evidence }}
+                            <p class="text-sm text-gray-500 mb-2">Foto Bukti Kerusakan</p>
+                            <a href="{{ asset('storage/' . $damageReport->photo_evidence) }}" target="_blank">
+                                <img src="{{ asset('storage/' . $damageReport->photo_evidence) }}" 
+                                     alt="Foto bukti kerusakan" 
+                                     class="max-w-md max-h-64 rounded-lg border shadow-sm hover:opacity-90 transition cursor-pointer">
                             </a>
+                            <p class="text-xs text-gray-400 mt-1">Klik untuk memperbesar</p>
                         </div>
                     @endif
 
