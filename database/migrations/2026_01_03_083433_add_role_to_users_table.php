@@ -12,8 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            // Tambah kolom role dengan default 'staff'
-            $table->enum('role', ['admin', 'staff', 'teknisi'])->default('staff')->after('email');
+            // Tambah kolom role jika belum ada
+            if (!Schema::hasColumn('users', 'role')) {
+                $table->enum('role', ['admin', 'staff', 'teknisi'])->default('staff')->after('email');
+            }
         });
     }
 
