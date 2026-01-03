@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class DamageReportController extends Controller
 {
@@ -59,19 +60,31 @@ class DamageReportController extends Controller
         $validated = $request->validate([
             'asset_id' => 'required|exists:assets,id',
             'description' => 'required|string|min:10',
-            'photo_evidence' => 'nullable|string|max:255',
+            'photo_evidence' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Max 2MB
         ], [
             'asset_id.required' => 'Asset wajib dipilih.',
             'asset_id.exists' => 'Asset tidak valid.',
             'description.required' => 'Deskripsi kerusakan wajib diisi.',
             'description.min' => 'Deskripsi minimal 10 karakter.',
+            'photo_evidence.image' => 'File harus berupa gambar.',
+            'photo_evidence.mimes' => 'Format gambar: jpeg, png, jpg, gif.',
+            'photo_evidence.max' => 'Ukuran gambar maksimal 2MB.',
         ]);
 
-        // Tambahkan user_id dari user yang login
-        $validated['user_id'] = Auth::id();
-        $validated['status'] = 'pending';
+        // Handle file upload
+        $photoPath = null;
+        if ($request->hasFile('photo_evidence')) {
+            $photoPath = $request->file('photo_evidence')->store('damage-reports', 'public');
+        }
 
-        DamageReport::create($validated);
+        // Buat laporan kerusakan
+        DamageReport::create([
+            'asset_id' => $validated['asset_id'],
+            'user_id' => Auth::id(),
+            'description' => $validated['description'],
+            'photo_evidence' => $photoPath,
+            'status' => 'pending',
+        ]);
 
         return redirect()->route('damage-reports.index')
             ->with('success', 'Laporan kerusakan berhasil dibuat!');
@@ -109,15 +122,39 @@ class DamageReportController extends Controller
         $validated = $request->validate([
             'asset_id' => 'required|exists:assets,id',
             'description' => 'required|string|min:10',
-            'photo_evidence' => 'nullable|string|max:255',
+            'photo_evidence' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|in:pending,process,fixed,rejected',
+            'remove_photo' => 'nullable|boolean',
         ], [
             'asset_id.required' => 'Asset wajib dipilih.',
             'description.required' => 'Deskripsi kerusakan wajib diisi.',
             'status.required' => 'Status wajib dipilih.',
+            'photo_evidence.image' => 'File harus berupa gambar.',
+            'photo_evidence.mimes' => 'Format gambar: jpeg, png, jpg, gif.',
+            'photo_evidence.max' => 'Ukuran gambar maksimal 2MB.',
         ]);
 
-        $damageReport->update($validated);
+        // Handle hapus foto
+        if ($request->boolean('remove_photo') && $damageReport->photo_evidence) {
+            Storage::disk('public')->delete($damageReport->photo_evidence);
+            $damageReport->photo_evidence = null;
+        }
+
+        // Handle upload foto baru
+        if ($request->hasFile('photo_evidence')) {
+            // Hapus foto lama jika ada
+            if ($damageReport->photo_evidence) {
+                Storage::disk('public')->delete($damageReport->photo_evidence);
+            }
+            // Simpan foto baru
+            $damageReport->photo_evidence = $request->file('photo_evidence')->store('damage-reports', 'public');
+        }
+
+        // Update data lainnya
+        $damageReport->asset_id = $validated['asset_id'];
+        $damageReport->description = $validated['description'];
+        $damageReport->status = $validated['status'];
+        $damageReport->save();
 
         // Jika status = fixed, update kondisi asset
         if ($validated['status'] === 'fixed') {
@@ -136,10 +173,16 @@ class DamageReportController extends Controller
      */
     public function destroy(DamageReport $damageReport): RedirectResponse
     {
+        // Hapus foto jika ada
+        if ($damageReport->photo_evidence) {
+            Storage::disk('public')->delete($damageReport->photo_evidence);
+        }
+
         $damageReport->delete();
 
         return redirect()->route('damage-reports.index')
             ->with('success', 'Laporan kerusakan berhasil dihapus!');
     }
 }
+
 
