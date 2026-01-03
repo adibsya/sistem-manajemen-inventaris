@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class DamageReportController extends Controller
 {
@@ -183,6 +184,30 @@ class DamageReportController extends Controller
         return redirect()->route('damage-reports.index')
             ->with('success', 'Laporan kerusakan berhasil dihapus!');
     }
+
+    /**
+     * Export laporan kerusakan ke PDF
+     */
+    public function exportPdf(Request $request)
+    {
+        $query = DamageReport::with(['asset', 'user']);
+
+        // Apply filters jika ada
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $damageReports = $query->orderBy('created_at', 'desc')->get();
+
+        $pdf = Pdf::loadView('exports.damage-reports-pdf', [
+            'damageReports' => $damageReports,
+            'title' => 'Laporan Kerusakan Asset',
+            'date' => now()->format('d F Y'),
+        ]);
+
+        return $pdf->download('laporan-kerusakan-' . now()->format('Y-m-d') . '.pdf');
+    }
 }
+
 
 

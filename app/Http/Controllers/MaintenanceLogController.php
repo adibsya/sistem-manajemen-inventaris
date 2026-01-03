@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class MaintenanceLogController extends Controller
 {
@@ -149,5 +150,34 @@ class MaintenanceLogController extends Controller
         return redirect()->route('maintenance-logs.index')
             ->with('success', 'Riwayat perbaikan berhasil dihapus!');
     }
+
+    /**
+     * Export riwayat perbaikan ke PDF
+     */
+    public function exportPdf(Request $request)
+    {
+        $query = MaintenanceLog::with(['asset', 'user']);
+
+        // Apply filters jika ada
+        if ($request->filled('month')) {
+            $query->whereMonth('completion_date', $request->month);
+        }
+        if ($request->filled('year')) {
+            $query->whereYear('completion_date', $request->year);
+        }
+
+        $maintenanceLogs = $query->orderBy('completion_date', 'desc')->get();
+        $totalCost = $maintenanceLogs->sum('cost');
+
+        $pdf = Pdf::loadView('exports.maintenance-logs-pdf', [
+            'maintenanceLogs' => $maintenanceLogs,
+            'totalCost' => $totalCost,
+            'title' => 'Laporan Riwayat Perbaikan',
+            'date' => now()->format('d F Y'),
+        ]);
+
+        return $pdf->download('laporan-perbaikan-' . now()->format('Y-m-d') . '.pdf');
+    }
 }
+
 
