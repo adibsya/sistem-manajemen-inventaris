@@ -1,13 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center justify-between">
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
             <div>
                 <h2 class="font-bold text-xl text-brand-blue leading-tight">
                     Dashboard
                 </h2>
                 <p class="text-sm text-gray-500 mt-1">Sistem Manajemen Inventaris Sekolah</p>
             </div>
-            <span class="text-sm text-gray-500">{{ now()->format('l, d F Y') }}</span>
+            <span class="text-sm text-gray-500 bg-gray-100 px-3 py-1.5 rounded-lg whitespace-nowrap">
+                📅 {{ now()->format('l, d F Y') }}
+            </span>
         </div>
     </x-slot>
 
