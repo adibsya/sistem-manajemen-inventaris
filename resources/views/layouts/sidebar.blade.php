@@ -13,15 +13,15 @@
 
 {{-- Sidebar --}}
 <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
-       class="fixed top-0 left-0 z-50 w-64 h-screen bg-brand-blue transition-transform duration-300 ease-in-out lg:translate-x-0">
+       class="fixed inset-y-0 left-0 z-50 w-64 bg-brand-blue flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0">
     
     {{-- Sidebar Header --}}
-    <div class="flex items-center justify-between h-16 px-4 border-b border-white/10">
+    <div class="flex items-center justify-between h-16 px-4 border-b border-white/20 flex-shrink-0">
         <a href="{{ route('dashboard') }}" class="flex items-center gap-2">
             <span class="text-2xl">📦</span>
-            <span class="text-white font-bold text-xl">E-SIMS</span>
+            <span class="text-white font-bold text-xl tracking-tight">E-SIMS</span>
         </a>
-        <button @click="sidebarOpen = false" class="lg:hidden p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition">
+        <button @click="sidebarOpen = false" class="lg:hidden p-1.5 rounded-lg text-white hover:bg-white/20 transition">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
@@ -29,95 +29,95 @@
     </div>
     
     {{-- Sidebar Navigation --}}
-    <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto scrollbar-thin">
+    <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
         {{-- Dashboard --}}
         <a href="{{ route('dashboard') }}" 
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition
-                  {{ request()->routeIs('dashboard') ? 'bg-white/20 text-white' : 'text-white/70 hover:text-white hover:bg-white/10' }}">
+           class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition
+                  {{ request()->routeIs('dashboard') ? 'bg-brand-yellow text-brand-blue' : 'text-white hover:bg-white/15' }}">
             <span class="text-lg">🏠</span>
-            <span class="font-medium">Dashboard</span>
+            <span>Dashboard</span>
         </a>
         
         {{-- Section: Data Master --}}
-        <div class="pt-4">
-            <p class="px-3 text-xs font-semibold text-white/40 uppercase tracking-wider">Data Master</p>
+        <div class="pt-5 pb-2">
+            <p class="px-3 text-xs font-bold text-white/50 uppercase tracking-wider">Data Master</p>
         </div>
         
         <a href="{{ route('assets.index') }}" 
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition
-                  {{ request()->routeIs('assets.*') ? 'bg-white/20 text-white' : 'text-white/70 hover:text-white hover:bg-white/10' }}">
+           class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition
+                  {{ request()->routeIs('assets.*') ? 'bg-brand-yellow text-brand-blue' : 'text-white hover:bg-white/15' }}">
             <span class="text-lg">📋</span>
-            <span class="font-medium">Assets</span>
+            <span>Assets</span>
         </a>
         
         <a href="{{ route('categories.index') }}" 
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition
-                  {{ request()->routeIs('categories.*') ? 'bg-white/20 text-white' : 'text-white/70 hover:text-white hover:bg-white/10' }}">
+           class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition
+                  {{ request()->routeIs('categories.*') ? 'bg-brand-yellow text-brand-blue' : 'text-white hover:bg-white/15' }}">
             <span class="text-lg">🏷️</span>
-            <span class="font-medium">Kategori</span>
+            <span>Kategori</span>
         </a>
         
         <a href="{{ route('rooms.index') }}" 
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition
-                  {{ request()->routeIs('rooms.*') ? 'bg-white/20 text-white' : 'text-white/70 hover:text-white hover:bg-white/10' }}">
+           class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition
+                  {{ request()->routeIs('rooms.*') ? 'bg-brand-yellow text-brand-blue' : 'text-white hover:bg-white/15' }}">
             <span class="text-lg">🚪</span>
-            <span class="font-medium">Ruangan</span>
+            <span>Ruangan</span>
         </a>
         
         {{-- Section: Laporan --}}
-        <div class="pt-4">
-            <p class="px-3 text-xs font-semibold text-white/40 uppercase tracking-wider">Laporan</p>
+        <div class="pt-5 pb-2">
+            <p class="px-3 text-xs font-bold text-white/50 uppercase tracking-wider">Laporan</p>
         </div>
         
         <a href="{{ route('damage-reports.index') }}" 
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition
-                  {{ request()->routeIs('damage-reports.*') ? 'bg-white/20 text-white' : 'text-white/70 hover:text-white hover:bg-white/10' }}">
+           class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition
+                  {{ request()->routeIs('damage-reports.*') ? 'bg-brand-yellow text-brand-blue' : 'text-white hover:bg-white/15' }}">
             <span class="text-lg">⚠️</span>
-            <span class="font-medium">Laporan Kerusakan</span>
+            <span>Laporan Kerusakan</span>
         </a>
         
         <a href="{{ route('maintenance-logs.index') }}" 
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition
-                  {{ request()->routeIs('maintenance-logs.*') ? 'bg-white/20 text-white' : 'text-white/70 hover:text-white hover:bg-white/10' }}">
+           class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition
+                  {{ request()->routeIs('maintenance-logs.*') ? 'bg-brand-yellow text-brand-blue' : 'text-white hover:bg-white/15' }}">
             <span class="text-lg">🔧</span>
-            <span class="font-medium">Riwayat Perbaikan</span>
+            <span>Riwayat Perbaikan</span>
         </a>
         
         {{-- Section: Admin --}}
         @if(Auth::user()->isAdmin())
-            <div class="pt-4">
-                <p class="px-3 text-xs font-semibold text-white/40 uppercase tracking-wider">Admin</p>
+            <div class="pt-5 pb-2">
+                <p class="px-3 text-xs font-bold text-white/50 uppercase tracking-wider">Admin</p>
             </div>
             
             <a href="{{ route('users.index') }}" 
-               class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition
-                      {{ request()->routeIs('users.*') ? 'bg-white/20 text-white' : 'text-white/70 hover:text-white hover:bg-white/10' }}">
+               class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition
+                      {{ request()->routeIs('users.*') ? 'bg-brand-yellow text-brand-blue' : 'text-white hover:bg-white/15' }}">
                 <span class="text-lg">👥</span>
-                <span class="font-medium">Kelola Users</span>
+                <span>Kelola Users</span>
             </a>
         @endif
     </nav>
     
     {{-- Sidebar Footer / User Info --}}
-    <div class="border-t border-white/10 p-4">
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-brand-yellow text-brand-blue font-bold rounded-full flex items-center justify-center">
+    <div class="border-t border-white/20 p-4 flex-shrink-0 bg-brand-blue">
+        <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 bg-brand-yellow text-brand-blue font-bold rounded-full flex items-center justify-center text-sm flex-shrink-0">
                 {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
             </div>
             <div class="flex-1 min-w-0">
-                <p class="text-sm font-medium text-white truncate">{{ Auth::user()->name }}</p>
-                <p class="text-xs text-white/60 truncate">{{ Auth::user()->email }}</p>
+                <p class="text-sm font-semibold text-white truncate">{{ Auth::user()->name }}</p>
+                <p class="text-xs text-white/70 truncate">{{ Auth::user()->email }}</p>
             </div>
         </div>
-        <div class="mt-3 flex gap-2">
+        <div class="flex gap-2">
             <a href="{{ route('profile.edit') }}" 
-               class="flex-1 text-center px-3 py-1.5 text-xs font-medium text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-lg transition">
+               class="flex-1 text-center px-3 py-2 text-xs font-semibold text-white bg-white/15 hover:bg-white/25 rounded-lg transition">
                 ⚙️ Profile
             </a>
             <form method="POST" action="{{ route('logout') }}" class="flex-1">
                 @csrf
                 <button type="submit" 
-                        class="w-full px-3 py-1.5 text-xs font-medium text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-lg transition">
+                        class="w-full px-3 py-2 text-xs font-semibold text-white bg-white/15 hover:bg-brand-red rounded-lg transition">
                     🚪 Logout
                 </button>
             </form>
