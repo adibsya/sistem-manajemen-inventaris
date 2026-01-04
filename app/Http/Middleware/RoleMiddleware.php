@@ -29,8 +29,9 @@ class RoleMiddleware
 
         // Cek apakah role user ada dalam daftar yang diizinkan
         if (!in_array($request->user()->role, $allowedRoles)) {
-            // Jika tidak diizinkan, abort dengan 403 Forbidden
-            abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+            // Jika tidak diizinkan, redirect kembali dengan warning message
+            return redirect()->back()
+                ->with('warning', 'Anda tidak memiliki akses ke halaman tersebut.');
         }
 
         return $next($request);
