@@ -36,10 +36,17 @@
                         
                         {{-- Page Heading --}}
                         @isset($header)
-                            <div class="flex-1 lg:flex-none">
+                            <div class="flex-1">
                                 {{ $header }}
                             </div>
                         @endisset
+                        
+                        {{-- Date (Center) --}}
+                        <div class="hidden lg:flex items-center mx-4">
+                            <span class="text-sm text-gray-500 bg-gray-100 px-4 py-1.5 rounded-lg whitespace-nowrap">
+                                📅 {{ now()->format('l, d F Y') }}
+                            </span>
+                        </div>
                         
                         {{-- User Dropdown (Desktop) --}}
                         <div class="hidden lg:flex items-center">
