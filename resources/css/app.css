@@ -68,6 +68,17 @@
 
 /* Custom Scrollbar */
 @layer utilities {
+    /* Hide scrollbar completely */
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+    
+    /* Thin styled scrollbar */
     .scrollbar-thin {
         scrollbar-width: thin;
         scrollbar-color: #134686 #fdf4e3;

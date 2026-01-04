@@ -13,7 +13,7 @@
 
 {{-- Sidebar --}}
 <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
-       class="fixed inset-y-0 left-0 z-50 w-64 bg-brand-blue flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0">
+       class="fixed inset-y-0 left-0 z-50 w-56 bg-brand-blue flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0">
     
     {{-- Sidebar Header --}}
     <div class="flex items-center justify-between h-16 px-4 border-b border-white/20 flex-shrink-0">
@@ -29,7 +29,7 @@
     </div>
     
     {{-- Sidebar Navigation --}}
-    <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+    <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto scrollbar-hide">
         {{-- Dashboard --}}
         <a href="{{ route('dashboard') }}" 
            class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition

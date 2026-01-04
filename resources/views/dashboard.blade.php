@@ -8,11 +8,11 @@
         </div>
     </x-slot>
 
-    <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-4 lg:py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             {{-- Statistik Utama --}}
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 lg:gap-6 mb-6 lg:mb-8">
                 {{-- Total Asset --}}
                 <div class="bg-white overflow-hidden rounded-xl shadow-sm border-l-4 border-brand-blue hover:shadow-md transition-shadow">
                     <div class="p-6">

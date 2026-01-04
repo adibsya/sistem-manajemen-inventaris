@@ -22,7 +22,7 @@
             @include('layouts.sidebar')
             
             {{-- Main Content --}}
-            <div class="flex-1 flex flex-col min-h-screen lg:ml-64">
+            <div class="flex-1 flex flex-col min-h-screen lg:ml-56">
                 {{-- Top Bar --}}
                 <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30">
                     <div class="flex items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
@@ -41,10 +41,10 @@
                             </div>
                         @endisset
                         
-                        {{-- Date (Center) --}}
-                        <div class="hidden lg:flex items-center mx-4">
-                            <span class="text-sm text-gray-500 bg-gray-100 px-4 py-1.5 rounded-lg whitespace-nowrap">
-                                📅 {{ now()->format('l, d F Y') }}
+                        {{-- Date (Center) - Hidden on smaller screens --}}
+                        <div class="hidden xl:flex items-center mx-4 flex-shrink-0">
+                            <span class="text-sm text-gray-500 bg-gray-100 px-3 py-1.5 rounded-lg whitespace-nowrap">
+                                📅 {{ now()->format('D, d M Y') }}
                             </span>
                         </div>
                         
