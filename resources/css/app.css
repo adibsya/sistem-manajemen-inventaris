@@ -1,3 +1,94 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Global Smooth Transitions */
+@layer base {
+    * {
+        @apply transition-colors duration-200;
+    }
+    
+    a, button {
+        @apply transition-all duration-200;
+    }
+}
+
+/* Custom Component Styles */
+@layer components {
+    /* Card with hover effect */
+    .card-hover {
+        @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
+    }
+    
+    /* Smooth fade in animation */
+    .fade-in {
+        animation: fadeIn 0.3s ease-in-out;
+    }
+    
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    /* Table responsive wrapper */
+    .table-responsive {
+        @apply overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0;
+    }
+    
+    /* Badge pulse animation for alerts */
+    .badge-pulse {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: .7;
+        }
+    }
+    
+    /* Button press effect */
+    .btn-press {
+        @apply active:scale-95 active:shadow-sm;
+    }
+    
+    /* Focus ring for accessibility */
+    .focus-ring {
+        @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue;
+    }
+}
+
+/* Custom Scrollbar */
+@layer utilities {
+    .scrollbar-thin {
+        scrollbar-width: thin;
+        scrollbar-color: #134686 #fdf4e3;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-track {
+        background: #fdf4e3;
+        border-radius: 3px;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+        background: #134686;
+        border-radius: 3px;
+    }
+    
+    .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+        background: #0f3a6d;
+    }
+}
