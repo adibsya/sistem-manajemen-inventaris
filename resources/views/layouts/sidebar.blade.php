@@ -13,112 +13,112 @@
 
 {{-- Sidebar --}}
 <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
-       class="fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0">
+       class="fixed inset-y-0 left-0 z-50 w-72 bg-primary-600 dark:bg-slate-900 flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0 rounded-r-3xl shadow-2xl lg:shadow-none lg:rounded-none">
     
     {{-- Sidebar Header --}}
-    <div class="flex items-center justify-between h-16 px-5 border-b border-slate-700/50 flex-shrink-0">
+    <div class="flex items-center justify-between h-20 px-8 flex-shrink-0">
         <a href="{{ route('dashboard') }}" class="flex items-center gap-3">
-            <div class="w-9 h-9 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg flex items-center justify-center">
-                <x-icon name="cube" class="w-5 h-5 text-white" />
+            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center shadow-sm">
+                <x-icon name="cube" class="w-6 h-6 text-primary-600" />
             </div>
-            <span class="text-white font-bold text-lg tracking-tight">E-SIMS</span>
+            <span class="text-white font-bold text-xl tracking-tight">E-SIMS</span>
         </a>
-        <button @click="sidebarOpen = false" class="lg:hidden p-1.5 rounded-lg text-slate-400 hover:bg-slate-800 hover:text-white transition">
-            <x-icon name="x-mark" class="w-5 h-5" />
+        <button @click="sidebarOpen = false" class="lg:hidden p-1.5 rounded-lg text-white/70 hover:bg-white/10 hover:text-white transition">
+            <x-icon name="x-mark" class="w-6 h-6" />
         </button>
     </div>
     
     {{-- Sidebar Navigation --}}
-    <nav class="flex-1 px-3 py-4 space-y-1 overflow-y-auto scrollbar-thin">
+    <nav class="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto scrollbar-thin">
         {{-- Dashboard --}}
         <a href="{{ route('dashboard') }}" 
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition
-                  {{ request()->routeIs('dashboard') ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/30' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
-            <x-icon name="dashboard" class="w-5 h-5" />
+           class="flex items-center gap-3.5 px-4 py-3 rounded-full font-medium transition-all group
+                  {{ request()->routeIs('dashboard') ? 'bg-white text-primary-700 shadow-lg' : 'text-white/80 hover:bg-white/10 hover:text-white' }}">
+            <x-icon name="dashboard" class="w-5 h-5 {{ request()->routeIs('dashboard') ? 'text-primary-600' : 'text-white/70 group-hover:text-white' }}" />
             <span>Dashboard</span>
         </a>
         
         {{-- Section: Data Master --}}
-        <div class="pt-6 pb-2">
-            <p class="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Data Master</p>
+        <div class="pt-6 pb-3 px-4">
+            <p class="text-xs font-bold text-white/40 uppercase tracking-widest">Data Master</p>
         </div>
         
         <a href="{{ route('assets.index') }}" 
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition
-                  {{ request()->routeIs('assets.*') ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/30' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
-            <x-icon name="assets" class="w-5 h-5" />
+           class="flex items-center gap-3.5 px-4 py-3 rounded-full font-medium transition-all group
+                  {{ request()->routeIs('assets.*') ? 'bg-white text-primary-700 shadow-lg' : 'text-white/80 hover:bg-white/10 hover:text-white' }}">
+            <x-icon name="assets" class="w-5 h-5 {{ request()->routeIs('assets.*') ? 'text-primary-600' : 'text-white/70 group-hover:text-white' }}" />
             <span>Assets</span>
         </a>
         
         <a href="{{ route('categories.index') }}" 
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition
-                  {{ request()->routeIs('categories.*') ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/30' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
-            <x-icon name="category" class="w-5 h-5" />
+           class="flex items-center gap-3.5 px-4 py-3 rounded-full font-medium transition-all group
+                  {{ request()->routeIs('categories.*') ? 'bg-white text-primary-700 shadow-lg' : 'text-white/80 hover:bg-white/10 hover:text-white' }}">
+            <x-icon name="category" class="w-5 h-5 {{ request()->routeIs('categories.*') ? 'text-primary-600' : 'text-white/70 group-hover:text-white' }}" />
             <span>Kategori</span>
         </a>
         
         <a href="{{ route('rooms.index') }}" 
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition
-                  {{ request()->routeIs('rooms.*') ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/30' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
-            <x-icon name="room" class="w-5 h-5" />
+           class="flex items-center gap-3.5 px-4 py-3 rounded-full font-medium transition-all group
+                  {{ request()->routeIs('rooms.*') ? 'bg-white text-primary-700 shadow-lg' : 'text-white/80 hover:bg-white/10 hover:text-white' }}">
+            <x-icon name="room" class="w-5 h-5 {{ request()->routeIs('rooms.*') ? 'text-primary-600' : 'text-white/70 group-hover:text-white' }}" />
             <span>Ruangan</span>
         </a>
         
         {{-- Section: Laporan --}}
-        <div class="pt-6 pb-2">
-            <p class="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Laporan</p>
+        <div class="pt-6 pb-3 px-4">
+            <p class="text-xs font-bold text-white/40 uppercase tracking-widest">Laporan</p>
         </div>
         
         <a href="{{ route('damage-reports.index') }}" 
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition
-                  {{ request()->routeIs('damage-reports.*') ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/30' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
-            <x-icon name="report" class="w-5 h-5" />
+           class="flex items-center gap-3.5 px-4 py-3 rounded-full font-medium transition-all group
+                  {{ request()->routeIs('damage-reports.*') ? 'bg-white text-primary-700 shadow-lg' : 'text-white/80 hover:bg-white/10 hover:text-white' }}">
+            <x-icon name="report" class="w-5 h-5 {{ request()->routeIs('damage-reports.*') ? 'text-primary-600' : 'text-white/70 group-hover:text-white' }}" />
             <span>Laporan Kerusakan</span>
         </a>
         
         <a href="{{ route('maintenance-logs.index') }}" 
-           class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition
-                  {{ request()->routeIs('maintenance-logs.*') ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/30' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
-            <x-icon name="maintenance" class="w-5 h-5" />
+           class="flex items-center gap-3.5 px-4 py-3 rounded-full font-medium transition-all group
+                  {{ request()->routeIs('maintenance-logs.*') ? 'bg-white text-primary-700 shadow-lg' : 'text-white/80 hover:bg-white/10 hover:text-white' }}">
+            <x-icon name="maintenance" class="w-5 h-5 {{ request()->routeIs('maintenance-logs.*') ? 'text-primary-600' : 'text-white/70 group-hover:text-white' }}" />
             <span>Riwayat Perbaikan</span>
         </a>
         
         {{-- Section: Admin --}}
         @if(Auth::user()->isAdmin())
-            <div class="pt-6 pb-2">
-                <p class="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Admin</p>
+            <div class="pt-6 pb-3 px-4">
+                <p class="text-xs font-bold text-white/40 uppercase tracking-widest">Admin</p>
             </div>
             
             <a href="{{ route('users.index') }}" 
-               class="flex items-center gap-3 px-3 py-2.5 rounded-lg font-medium transition
-                      {{ request()->routeIs('users.*') ? 'bg-primary-600 text-white shadow-lg shadow-primary-600/30' : 'text-slate-300 hover:bg-slate-800 hover:text-white' }}">
-                <x-icon name="users" class="w-5 h-5" />
+               class="flex items-center gap-3.5 px-4 py-3 rounded-full font-medium transition-all group
+                      {{ request()->routeIs('users.*') ? 'bg-white text-primary-700 shadow-lg' : 'text-white/80 hover:bg-white/10 hover:text-white' }}">
+                <x-icon name="users" class="w-5 h-5 {{ request()->routeIs('users.*') ? 'text-primary-600' : 'text-white/70 group-hover:text-white' }}" />
                 <span>Kelola Users</span>
             </a>
         @endif
     </nav>
     
     {{-- Sidebar Footer / User Info --}}
-    <div class="border-t border-slate-700/50 p-4 flex-shrink-0">
-        <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 font-bold rounded-full flex items-center justify-center text-sm text-white flex-shrink-0">
+    <div class="px-6 py-6 border-t border-white/10 flex-shrink-0">
+        <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-white/10 backdrop-blur-sm font-bold rounded-xl flex items-center justify-center text-sm text-white flex-shrink-0 border border-white/10">
                 {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
             </div>
             <div class="flex-1 min-w-0">
-                <p class="text-sm font-semibold text-white truncate">{{ Auth::user()->name }}</p>
-                <p class="text-xs text-slate-400 truncate">{{ Auth::user()->email }}</p>
+                <p class="text-sm font-bold text-white truncate">{{ Auth::user()->name }}</p>
+                <p class="text-xs text-white/60 truncate">{{ Auth::user()->email }}</p>
             </div>
         </div>
         <div class="flex gap-2">
             <a href="{{ route('profile.edit') }}" 
-               class="flex-1 text-center px-3 py-2 text-xs font-semibold text-slate-300 bg-slate-800 hover:bg-slate-700 rounded-lg transition flex items-center justify-center gap-1.5">
+               class="flex-1 text-center px-3 py-2 text-xs font-semibold text-white bg-white/10 hover:bg-white/20 rounded-lg transition flex items-center justify-center gap-2">
                 <x-icon name="cog" class="w-3.5 h-3.5" />
                 Profile
             </a>
             <form method="POST" action="{{ route('logout') }}" class="flex-1">
                 @csrf
                 <button type="submit" 
-                        class="w-full px-3 py-2 text-xs font-semibold text-slate-300 bg-slate-800 hover:bg-rose-600 hover:text-white rounded-lg transition flex items-center justify-center gap-1.5">
+                        class="w-full px-3 py-2 text-xs font-semibold text-white bg-white/10 hover:bg-rose-500/80 hover:text-white rounded-lg transition flex items-center justify-center gap-2">
                     <x-icon name="logout" class="w-3.5 h-3.5" />
                     Logout
                 </button>

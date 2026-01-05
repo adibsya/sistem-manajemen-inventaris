@@ -5,11 +5,11 @@
 /* CSS Custom Properties for Theme */
 @layer base {
     :root {
-        --color-bg: 248 250 252;
+        --color-bg: 239 236 227; /* cream-200 */
         --color-surface: 255 255 255;
-        --color-surface-alt: 241 245 249;
-        --color-text: 15 23 42;
-        --color-text-muted: 100 116 139;
+        --color-surface-alt: 247 246 241; /* cream-100 */
+        --color-text: 30 41 59; /* slate-800 */
+        --color-text-muted: 100 116 139; /* slate-500 */
         --color-border: 226 232 240;
     }
     
