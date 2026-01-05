@@ -16,16 +16,16 @@
                 {{-- Total Asset --}}
                 <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300 group h-full">
                     <div class="p-5 sm:p-6 h-full flex flex-col">
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="p-3 rounded-xl bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 group-hover:scale-105 transition-transform">
+                        <div class="flex items-center gap-4 flex-1">
+                            <div class="w-12 h-12 rounded-xl bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
                                 <x-icon name="cube" class="w-6 h-6" />
                             </div>
-                            <div>
-                                <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Total Asset</p>
-                                <p class="text-2xl font-bold text-slate-800 dark:text-white">{{ $totalAssets }}</p>
+                            <div class="min-w-0">
+                                <p class="text-sm text-slate-500 dark:text-slate-400 font-medium leading-tight">Total Asset</p>
+                                <p class="text-2xl font-bold text-slate-800 dark:text-white leading-tight mt-0.5">{{ $totalAssets }}</p>
                             </div>
                         </div>
-                        <div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-700">
+                        <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700">
                             <a href="{{ route('assets.index') }}" class="text-primary-600 dark:text-primary-400 text-sm inline-flex items-center font-medium hover:underline">
                                 Lihat semua <x-icon name="chevron-right" class="w-4 h-4 ml-1" />
                             </a>
@@ -36,16 +36,16 @@
                 {{-- Laporan Pending --}}
                 <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300 group h-full">
                     <div class="p-5 sm:p-6 h-full flex flex-col">
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="p-3 rounded-xl bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 group-hover:scale-105 transition-transform">
+                        <div class="flex items-center gap-4 flex-1">
+                            <div class="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
                                 <x-icon name="exclamation-triangle" class="w-6 h-6" />
                             </div>
-                            <div>
-                                <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Laporan Pending</p>
-                                <p class="text-2xl font-bold text-amber-600 dark:text-amber-400">{{ $pendingReports }}</p>
+                            <div class="min-w-0">
+                                <p class="text-sm text-slate-500 dark:text-slate-400 font-medium leading-tight">Laporan Pending</p>
+                                <p class="text-2xl font-bold text-amber-600 dark:text-amber-400 leading-tight mt-0.5">{{ $pendingReports }}</p>
                             </div>
                         </div>
-                        <div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-700">
+                        <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700">
                             <a href="{{ route('damage-reports.index', ['status' => 'pending']) }}" class="text-amber-600 dark:text-amber-400 text-sm inline-flex items-center font-medium hover:underline">
                                 Lihat laporan <x-icon name="chevron-right" class="w-4 h-4 ml-1" />
                             </a>
@@ -56,16 +56,16 @@
                 {{-- Sedang Diperbaiki --}}
                 <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300 group h-full">
                     <div class="p-5 sm:p-6 h-full flex flex-col">
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="p-3 rounded-xl bg-rose-50 dark:bg-rose-900/20 text-rose-600 dark:text-rose-400 group-hover:scale-105 transition-transform">
+                        <div class="flex items-center gap-4 flex-1">
+                            <div class="w-12 h-12 rounded-xl bg-rose-50 dark:bg-rose-900/20 text-rose-600 dark:text-rose-400 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
                                 <x-icon name="maintenance" class="w-6 h-6" />
                             </div>
-                            <div>
-                                <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Sedang Diperbaiki</p>
-                                <p class="text-2xl font-bold text-rose-600 dark:text-rose-400">{{ $processReports }}</p>
+                            <div class="min-w-0">
+                                <p class="text-sm text-slate-500 dark:text-slate-400 font-medium leading-tight">Sedang Diperbaiki</p>
+                                <p class="text-2xl font-bold text-rose-600 dark:text-rose-400 leading-tight mt-0.5">{{ $processReports }}</p>
                             </div>
                         </div>
-                        <div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-700">
+                        <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700">
                             <a href="{{ route('damage-reports.index', ['status' => 'process']) }}" class="text-rose-600 dark:text-rose-400 text-sm inline-flex items-center font-medium hover:underline">
                                 Lihat proses <x-icon name="chevron-right" class="w-4 h-4 ml-1" />
                             </a>
@@ -76,16 +76,16 @@
                 {{-- Total Biaya Perbaikan --}}
                 <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-lg transition-all duration-300 group h-full">
                     <div class="p-5 sm:p-6 h-full flex flex-col">
-                        <div class="flex items-center gap-4 mb-4">
-                            <div class="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 group-hover:scale-105 transition-transform">
+                        <div class="flex items-center gap-4 flex-1">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
                                 <x-icon name="currency" class="w-6 h-6" />
                             </div>
-                            <div>
-                                <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Total Biaya</p>
-                                <p class="text-xl font-bold text-emerald-600 dark:text-emerald-400">Rp {{ number_format($totalMaintenanceCost, 0, ',', '.') }}</p>
+                            <div class="min-w-0">
+                                <p class="text-sm text-slate-500 dark:text-slate-400 font-medium leading-tight">Total Biaya</p>
+                                <p class="text-xl font-bold text-emerald-600 dark:text-emerald-400 leading-tight mt-0.5">Rp {{ number_format($totalMaintenanceCost, 0, ',', '.') }}</p>
                             </div>
                         </div>
-                        <div class="mt-auto pt-4 border-t border-slate-100 dark:border-slate-700">
+                        <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-700">
                             <p class="text-sm text-slate-500 dark:text-slate-400">
                                 Bulan ini: <span class="font-semibold text-slate-700 dark:text-slate-300">Rp {{ number_format($monthlyMaintenanceCost, 0, ',', '.') }}</span>
                             </p>
