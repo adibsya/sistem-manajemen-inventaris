@@ -1,29 +1,26 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-bold text-xl text-brand-blue leading-tight">
-                🔧 Riwayat Perbaikan
-            </h2>
-            <div class="flex gap-3">
-                <a href="{{ route('maintenance-logs.export.pdf', request()->query()) }}" 
-                   class="inline-flex items-center px-4 py-2.5 bg-brand-blue hover:bg-brand-blue/90 text-white font-medium rounded-lg transition shadow-sm">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                    Export PDF
-                </a>
-                <a href="{{ route('maintenance-logs.create') }}" 
-                   class="inline-flex items-center px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition shadow-sm">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
-                    Tambah Riwayat
-                </a>
-            </div>
-        </div>
+        <h2 class="font-bold text-xl text-brand-blue leading-tight">
+            🔧 Riwayat Perbaikan
+        </h2>
     </x-slot>
 
     <div class="py-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            
+            {{-- Action Buttons - Mobile View --}}
+            <div class="flex gap-2 mb-4 sm:hidden">
+                <a href="{{ route('maintenance-logs.export.pdf', request()->query()) }}" 
+                   class="flex-1 inline-flex items-center justify-center px-3 py-2.5 bg-brand-blue hover:bg-brand-blue/90 text-white font-medium rounded-lg transition shadow-sm text-sm">
+                    <x-icon name="download" class="w-4 h-4 mr-2" />
+                    Export PDF
+                </a>
+                <a href="{{ route('maintenance-logs.create') }}" 
+                   class="flex-1 inline-flex items-center justify-center px-3 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition shadow-sm text-sm">
+                    <x-icon name="plus" class="w-4 h-4 mr-2" />
+                    Tambah Riwayat
+                </a>
+            </div>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             
             @if (session('success'))

@@ -1,29 +1,29 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
-            <h2 class="font-bold text-xl text-slate-800 dark:text-white leading-tight flex items-center gap-2">
-                <x-icon name="assets" class="w-6 h-6 text-primary-600 dark:text-primary-400" />
-                Daftar Asset
-            </h2>
-            @if(Auth::user()->isAdmin() || Auth::user()->isTeknisi())
-                <div class="flex gap-2 sm:gap-3">
-                    <a href="{{ route('assets.export.pdf', request()->query()) }}" 
-                       class="inline-flex items-center justify-center px-3 sm:px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition shadow-sm text-sm">
-                        <x-icon name="download" class="w-4 h-4 sm:mr-2" />
-                        <span class="hidden sm:inline">Export PDF</span>
-                    </a>
-                    <a href="{{ route('assets.create') }}" 
-                       class="inline-flex items-center justify-center px-3 sm:px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition shadow-sm text-sm">
-                        <x-icon name="plus" class="w-4 h-4 sm:mr-2" />
-                        <span class="hidden sm:inline">Tambah Asset</span>
-                    </a>
-                </div>
-            @endif
-        </div>
+        <h2 class="font-bold text-xl text-slate-800 dark:text-white leading-tight flex items-center gap-2">
+            <x-icon name="assets" class="w-6 h-6 text-primary-600 dark:text-primary-400" />
+            Daftar Asset
+        </h2>
     </x-slot>
 
     <div class="py-4 sm:py-6 lg:py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            @if(Auth::user()->isAdmin() || Auth::user()->isTeknisi())
+                {{-- Action Buttons - Visible on Mobile --}}
+                <div class="flex gap-2 mb-4 sm:hidden">
+                    <a href="{{ route('assets.export.pdf', request()->query()) }}" 
+                       class="flex-1 inline-flex items-center justify-center px-3 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition shadow-sm text-sm">
+                        <x-icon name="download" class="w-4 h-4 mr-2" />
+                        Export PDF
+                    </a>
+                    <a href="{{ route('assets.create') }}" 
+                       class="flex-1 inline-flex items-center justify-center px-3 py-2.5 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition shadow-sm text-sm">
+                        <x-icon name="plus" class="w-4 h-4 mr-2" />
+                        Tambah Asset
+                    </a>
+                </div>
+            @endif
             
             {{-- Flash Message Sukses --}}
             @if (session('success'))

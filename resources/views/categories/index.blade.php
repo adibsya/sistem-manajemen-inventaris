@@ -1,21 +1,23 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-bold text-xl text-brand-blue leading-tight">
-                🏷️ Daftar Kategori
-            </h2>
-            <a href="{{ route('categories.create') }}" 
-               class="inline-flex items-center px-4 py-2.5 bg-brand-blue hover:bg-brand-blue/90 text-white font-medium rounded-lg transition shadow-sm">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                </svg>
-                Tambah Kategori
-            </a>
-        </div>
+        <h2 class="font-bold text-xl text-brand-blue leading-tight">
+            🏷️ Daftar Kategori
+        </h2>
     </x-slot>
 
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+            {{-- Action Button - Mobile View --}}
+            <div class="mb-4 sm:hidden">
+                <a href="{{ route('categories.create') }}" 
+                   class="w-full inline-flex items-center justify-center px-4 py-2.5 bg-brand-blue hover:bg-brand-blue/90 text-white font-medium rounded-lg transition shadow-sm">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    Tambah Kategori
+                </a>
+            </div>
 
             {{-- Tabel Kategori --}}
             <div class="bg-white overflow-hidden rounded-xl shadow-sm">
