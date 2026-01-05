@@ -2,14 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global Smooth Transitions */
+/* CSS Custom Properties for Theme */
 @layer base {
+    :root {
+        --color-bg: 248 250 252;
+        --color-surface: 255 255 255;
+        --color-surface-alt: 241 245 249;
+        --color-text: 15 23 42;
+        --color-text-muted: 100 116 139;
+        --color-border: 226 232 240;
+    }
+    
+    .dark {
+        --color-bg: 15 23 42;
+        --color-surface: 30 41 59;
+        --color-surface-alt: 51 65 85;
+        --color-text: 248 250 252;
+        --color-text-muted: 148 163 184;
+        --color-border: 51 65 85;
+    }
+
     * {
         @apply transition-colors duration-200;
     }
     
     a, button {
         @apply transition-all duration-200;
+    }
+
+    body {
+        @apply bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100;
     }
 }
 
@@ -18,6 +40,11 @@
     /* Card with hover effect */
     .card-hover {
         @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5;
+    }
+    
+    /* Professional card styling */
+    .card {
+        @apply bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700;
     }
     
     /* Smooth fade in animation */
@@ -62,7 +89,16 @@
     
     /* Focus ring for accessibility */
     .focus-ring {
-        @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-blue;
+        @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 dark:focus:ring-offset-slate-900;
+    }
+
+    /* Professional button styles */
+    .btn-primary {
+        @apply inline-flex items-center px-4 py-2.5 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition shadow-sm;
+    }
+
+    .btn-secondary {
+        @apply inline-flex items-center px-4 py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 font-medium rounded-lg transition;
     }
 }
 
@@ -81,7 +117,11 @@
     /* Thin styled scrollbar */
     .scrollbar-thin {
         scrollbar-width: thin;
-        scrollbar-color: #134686 #fdf4e3;
+        scrollbar-color: rgb(148 163 184) transparent;
+    }
+
+    .dark .scrollbar-thin {
+        scrollbar-color: rgb(71 85 105) transparent;
     }
     
     .scrollbar-thin::-webkit-scrollbar {
@@ -90,16 +130,25 @@
     }
     
     .scrollbar-thin::-webkit-scrollbar-track {
-        background: #fdf4e3;
+        background: transparent;
         border-radius: 3px;
     }
     
     .scrollbar-thin::-webkit-scrollbar-thumb {
-        background: #134686;
+        background: rgb(148 163 184);
         border-radius: 3px;
+    }
+
+    .dark .scrollbar-thin::-webkit-scrollbar-thumb {
+        background: rgb(71 85 105);
     }
     
     .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-        background: #0f3a6d;
+        background: rgb(100 116 139);
+    }
+
+    .dark .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+        background: rgb(100 116 139);
     }
 }
+

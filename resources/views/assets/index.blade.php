@@ -2,25 +2,22 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <div>
-                <h2 class="font-bold text-xl text-brand-blue leading-tight">
-                    📦 Daftar Asset
+                <h2 class="font-bold text-xl text-slate-800 dark:text-white leading-tight flex items-center gap-2">
+                    <x-icon name="assets" class="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                    Daftar Asset
                 </h2>
-                <p class="text-sm text-gray-500 mt-1">Kelola semua inventaris asset</p>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Kelola semua inventaris asset</p>
             </div>
             <div class="flex gap-3">
                 @if(Auth::user()->isAdmin() || Auth::user()->isTeknisi())
                     <a href="{{ route('assets.export.pdf', request()->query()) }}" 
-                       class="inline-flex items-center px-4 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition shadow-sm">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
+                       class="inline-flex items-center px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition shadow-sm">
+                        <x-icon name="download" class="w-4 h-4 mr-2" />
                         Export PDF
                     </a>
                     <a href="{{ route('assets.create') }}" 
-                       class="inline-flex items-center px-4 py-2.5 bg-brand-blue hover:bg-brand-blue/90 text-white font-medium rounded-lg transition shadow-sm">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                        </svg>
+                       class="inline-flex items-center px-4 py-2.5 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition shadow-sm">
+                        <x-icon name="plus" class="w-4 h-4 mr-2" />
                         Tambah Asset
                     </a>
                 @endif
@@ -33,21 +30,17 @@
             
             {{-- Flash Message Sukses --}}
             @if (session('success'))
-                <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl mb-6 flex items-center">
-                    <svg class="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+                <div class="bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 px-4 py-3 rounded-xl mb-6 flex items-center">
+                    <x-icon name="check-circle" class="w-5 h-5 mr-2 text-emerald-500" />
                     {{ session('success') }}
                 </div>
             @endif
 
             {{-- Filter dan Pencarian --}}
-            <div class="bg-white overflow-hidden rounded-xl shadow-sm mb-6">
-                <div class="border-b border-gray-100 bg-gray-50 px-6 py-4">
-                    <h3 class="font-semibold text-gray-700 flex items-center">
-                        <svg class="w-4 h-4 mr-2 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
-                        </svg>
+            <div class="bg-white dark:bg-slate-800 overflow-hidden rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 mb-6">
+                <div class="border-b border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-700/50 px-6 py-4">
+                    <h3 class="font-semibold text-slate-700 dark:text-slate-200 flex items-center">
+                        <x-icon name="filter" class="w-4 h-4 mr-2 text-slate-500 dark:text-slate-400" />
                         Filter & Pencarian
                     </h3>
                 </div>
@@ -56,20 +49,18 @@
                         {{-- Search --}}
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                </svg>
+                                <x-icon name="search" class="w-4 h-4 text-slate-400" />
                             </div>
                             <input type="text" 
                                    name="search" 
                                    value="{{ request('search') }}"
                                    placeholder="Cari nama/kode..."
-                                   class="w-full pl-10 border-gray-300 rounded-lg shadow-sm text-sm focus:border-brand-blue focus:ring-brand-blue">
+                                   class="w-full pl-10 border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-lg shadow-sm text-sm focus:border-primary-500 focus:ring-primary-500">
                         </div>
                         
                         {{-- Filter Kategori --}}
                         <div>
-                            <select name="category_id" class="w-full border-gray-300 rounded-lg shadow-sm text-sm focus:border-brand-blue focus:ring-brand-blue">
+                            <select name="category_id" class="w-full border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-lg shadow-sm text-sm focus:border-primary-500 focus:ring-primary-500">
                                 <option value="">Semua Kategori</option>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
@@ -81,7 +72,7 @@
                         
                         {{-- Filter Ruangan --}}
                         <div>
-                            <select name="room_id" class="w-full border-gray-300 rounded-lg shadow-sm text-sm focus:border-brand-blue focus:ring-brand-blue">
+                            <select name="room_id" class="w-full border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-lg shadow-sm text-sm focus:border-primary-500 focus:ring-primary-500">
                                 <option value="">Semua Ruangan</option>
                                 @foreach($rooms as $room)
                                     <option value="{{ $room->id }}" {{ request('room_id') == $room->id ? 'selected' : '' }}>
@@ -93,7 +84,7 @@
                         
                         {{-- Filter Kondisi --}}
                         <div>
-                            <select name="condition" class="w-full border-gray-300 rounded-lg shadow-sm text-sm focus:border-brand-blue focus:ring-brand-blue">
+                            <select name="condition" class="w-full border-slate-300 dark:border-slate-600 dark:bg-slate-700 dark:text-white rounded-lg shadow-sm text-sm focus:border-primary-500 focus:ring-primary-500">
                                 <option value="">Semua Kondisi</option>
                                 @foreach($conditions as $cond)
                                     <option value="{{ $cond }}" {{ request('condition') == $cond ? 'selected' : '' }}>
@@ -105,10 +96,10 @@
                         
                         {{-- Tombol Filter --}}
                         <div class="flex gap-2">
-                            <button type="submit" class="flex-1 bg-brand-blue text-white px-4 py-2 rounded-lg text-sm hover:bg-brand-blue/90 transition font-medium">
+                            <button type="submit" class="flex-1 bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm transition font-medium">
                                 Terapkan
                             </button>
-                            <a href="{{ route('assets.index') }}" class="bg-gray-100 text-gray-600 px-4 py-2 rounded-lg text-sm hover:bg-gray-200 transition">
+                            <a href="{{ route('assets.index') }}" class="bg-slate-100 dark:bg-slate-700 text-slate-600 dark:text-slate-300 px-4 py-2 rounded-lg text-sm hover:bg-slate-200 dark:hover:bg-slate-600 transition">
                                 Reset
                             </a>
                         </div>
@@ -117,10 +108,10 @@
             </div>
 
             {{-- Tabel Asset --}}
-            <div class="bg-white overflow-hidden rounded-xl shadow-sm">
+            <div class="bg-white dark:bg-slate-800 overflow-hidden rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
                 <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-brand-blue">
+                    <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+                        <thead class="bg-slate-800 dark:bg-slate-900">
                             <tr>
                                 <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Kode</th>
                                 <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Nama Asset</th>
@@ -130,69 +121,66 @@
                                 <th class="px-6 py-4 text-center text-xs font-semibold text-white uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-100">
+                        <tbody class="bg-white dark:bg-slate-800 divide-y divide-slate-100 dark:divide-slate-700">
                             @forelse ($assets as $asset)
-                                <tr class="hover:bg-gray-50 transition">
+                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition">
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="text-sm font-mono font-semibold text-brand-blue bg-brand-blue/10 px-2 py-1 rounded">
+                                        <span class="text-sm font-mono font-semibold text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30 px-2 py-1 rounded">
                                             {{ $asset->code }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-gray-900">{{ $asset->name }}</div>
-                                        <div class="text-xs text-gray-500">{{ $asset->brand ?? '-' }}</div>
+                                        <div class="text-sm font-medium text-slate-900 dark:text-white">{{ $asset->name }}</div>
+                                        <div class="text-xs text-slate-500 dark:text-slate-400">{{ $asset->brand ?? '-' }}</div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-brand-blue/10 text-brand-blue">
+                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300">
                                             {{ $asset->category->name }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
-                                            📍 {{ $asset->room->name }}
+                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 gap-1">
+                                            <x-icon name="location" class="w-3 h-3" />
+                                            {{ $asset->room->name }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium
-                                            @if($asset->condition === 'bagus') bg-green-100 text-green-700
-                                            @elseif($asset->condition === 'rusak ringan') bg-brand-yellow/20 text-yellow-700
-                                            @elseif($asset->condition === 'rusak sedang') bg-orange-100 text-orange-700
-                                            @elseif($asset->condition === 'diperbaiki') bg-blue-100 text-blue-700
-                                            @else bg-brand-red/10 text-brand-red
+                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium gap-1
+                                            @if($asset->condition === 'bagus') bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300
+                                            @elseif($asset->condition === 'rusak ringan') bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300
+                                            @elseif($asset->condition === 'rusak sedang') bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300
+                                            @elseif($asset->condition === 'diperbaiki') bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300
+                                            @else bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300
                                             @endif">
-                                            @if($asset->condition === 'bagus') ✓
-                                            @elseif($asset->condition === 'diperbaiki') 🔧
-                                            @else ⚠
+                                            @if($asset->condition === 'bagus')
+                                                <x-icon name="check-circle" class="w-3 h-3" />
+                                            @elseif($asset->condition === 'diperbaiki')
+                                                <x-icon name="maintenance" class="w-3 h-3" />
+                                            @else
+                                                <x-icon name="exclamation-triangle" class="w-3 h-3" />
                                             @endif
                                             {{ ucfirst($asset->condition) }}
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-center">
-                                        <div class="flex items-center justify-center gap-2">
+                                        <div class="flex items-center justify-center gap-1">
                                             <a href="{{ route('assets.show', $asset) }}" 
-                                               class="p-2 text-gray-500 hover:text-brand-blue hover:bg-brand-blue/10 rounded-lg transition"
+                                               class="p-2 text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg transition"
                                                title="Lihat Detail">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                                </svg>
+                                                <x-icon name="eye" class="w-4 h-4" />
                                             </a>
                                             <a href="{{ route('assets.edit', $asset) }}" 
-                                               class="p-2 text-gray-500 hover:text-brand-yellow hover:bg-brand-yellow/10 rounded-lg transition"
+                                               class="p-2 text-slate-500 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/30 rounded-lg transition"
                                                title="Edit">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
-                                                </svg>
+                                                <x-icon name="edit" class="w-4 h-4" />
                                             </a>
                                             <form action="{{ route('assets.destroy', $asset) }}" method="POST" class="inline" onsubmit="return confirm('Yakin ingin menghapus asset ini?')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" 
-                                                        class="p-2 text-gray-500 hover:text-brand-red hover:bg-brand-red/10 rounded-lg transition"
+                                                        class="p-2 text-slate-500 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-lg transition"
                                                         title="Hapus">
-                                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                                    </svg>
+                                                    <x-icon name="trash" class="w-4 h-4" />
                                                 </button>
                                             </form>
                                         </div>
@@ -202,11 +190,11 @@
                                 <tr>
                                     <td colspan="6" class="px-6 py-12 text-center">
                                         <div class="flex flex-col items-center">
-                                            <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                                                <span class="text-3xl">📦</span>
+                                            <div class="w-16 h-16 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mb-4">
+                                                <x-icon name="assets" class="w-8 h-8 text-slate-400 dark:text-slate-500" />
                                             </div>
-                                            <p class="text-gray-500 mb-2">Belum ada asset.</p>
-                                            <a href="{{ route('assets.create') }}" class="text-brand-blue hover:text-brand-blue/80 font-medium">
+                                            <p class="text-slate-500 dark:text-slate-400 mb-2">Belum ada asset.</p>
+                                            <a href="{{ route('assets.create') }}" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 font-medium">
                                                 + Tambah asset pertama
                                             </a>
                                         </div>
@@ -219,7 +207,7 @@
 
                 {{-- Pagination --}}
                 @if($assets->hasPages())
-                    <div class="px-6 py-4 border-t border-gray-100">
+                    <div class="px-6 py-4 border-t border-slate-100 dark:border-slate-700">
                         {{ $assets->withQueryString()->links() }}
                     </div>
                 @endif
