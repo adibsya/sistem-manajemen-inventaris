@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div>
-            <h2 class="font-bold text-2xl text-primary-900 dark:text-white leading-tight font-display">
+            <h2 class="font-bold text-xl sm:text-2xl text-primary-900 dark:text-white leading-tight font-display">
                 Dashboard
             </h2>
-            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Overview of your inventory status</p>
+            <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Overview of your inventory status</p>
         </div>
     </x-slot>
 
