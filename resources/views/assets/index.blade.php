@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between items-center">
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
             <div>
                 <h2 class="font-bold text-xl text-slate-800 dark:text-white leading-tight flex items-center gap-2">
                     <x-icon name="assets" class="w-6 h-6 text-primary-600 dark:text-primary-400" />
@@ -8,46 +8,46 @@
                 </h2>
                 <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Kelola semua inventaris asset</p>
             </div>
-            <div class="flex gap-3">
-                @if(Auth::user()->isAdmin() || Auth::user()->isTeknisi())
+            @if(Auth::user()->isAdmin() || Auth::user()->isTeknisi())
+                <div class="flex gap-2 sm:gap-3">
                     <a href="{{ route('assets.export.pdf', request()->query()) }}" 
-                       class="inline-flex items-center px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition shadow-sm">
-                        <x-icon name="download" class="w-4 h-4 mr-2" />
-                        Export PDF
+                       class="inline-flex items-center justify-center px-3 sm:px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition shadow-sm text-sm">
+                        <x-icon name="download" class="w-4 h-4 sm:mr-2" />
+                        <span class="hidden sm:inline">Export PDF</span>
                     </a>
                     <a href="{{ route('assets.create') }}" 
-                       class="inline-flex items-center px-4 py-2.5 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition shadow-sm">
-                        <x-icon name="plus" class="w-4 h-4 mr-2" />
-                        Tambah Asset
+                       class="inline-flex items-center justify-center px-3 sm:px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition shadow-sm text-sm">
+                        <x-icon name="plus" class="w-4 h-4 sm:mr-2" />
+                        <span class="hidden sm:inline">Tambah Asset</span>
                     </a>
-                @endif
-            </div>
+                </div>
+            @endif
         </div>
     </x-slot>
 
-    <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-4 sm:py-6 lg:py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             {{-- Flash Message Sukses --}}
             @if (session('success'))
-                <div class="bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 px-4 py-3 rounded-xl mb-6 flex items-center">
-                    <x-icon name="check-circle" class="w-5 h-5 mr-2 text-emerald-500" />
+                <div class="bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300 px-4 py-3 rounded-xl mb-4 sm:mb-6 flex items-center text-sm">
+                    <x-icon name="check-circle" class="w-5 h-5 mr-2 text-emerald-500 flex-shrink-0" />
                     {{ session('success') }}
                 </div>
             @endif
 
             {{-- Filter dan Pencarian --}}
-            <div class="bg-white dark:bg-slate-800 overflow-hidden rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 mb-6">
-                <div class="border-b border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-700/50 px-6 py-4">
-                    <h3 class="font-semibold text-slate-700 dark:text-slate-200 flex items-center">
+            <div class="bg-white dark:bg-slate-800 overflow-hidden rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 mb-4 sm:mb-6">
+                <div class="border-b border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-700/50 px-4 sm:px-6 py-3 sm:py-4">
+                    <h3 class="font-semibold text-slate-700 dark:text-slate-200 flex items-center text-sm sm:text-base">
                         <x-icon name="filter" class="w-4 h-4 mr-2 text-slate-500 dark:text-slate-400" />
                         Filter & Pencarian
                     </h3>
                 </div>
-                <div class="p-6">
-                    <form action="{{ route('assets.index') }}" method="GET" class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                <div class="p-4 sm:p-6">
+                    <form action="{{ route('assets.index') }}" method="GET" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
                         {{-- Search --}}
-                        <div class="relative">
+                        <div class="relative sm:col-span-2 lg:col-span-1">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <x-icon name="search" class="w-4 h-4 text-slate-400" />
                             </div>
@@ -95,7 +95,7 @@
                         </div>
                         
                         {{-- Tombol Filter --}}
-                        <div class="flex gap-2">
+                        <div class="flex gap-2 sm:col-span-2 lg:col-span-1">
                             <button type="submit" class="flex-1 bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm transition font-medium">
                                 Terapkan
                             </button>
@@ -107,45 +107,119 @@
                 </div>
             </div>
 
-            {{-- Tabel Asset --}}
-            <div class="bg-white dark:bg-slate-800 overflow-hidden rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+            {{-- Mobile/Tablet Card View --}}
+            <div class="lg:hidden space-y-3">
+                @forelse ($assets as $asset)
+                    <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-4">
+                        <div class="flex items-start justify-between gap-3">
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="text-xs font-mono font-semibold text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30 px-2 py-0.5 rounded">
+                                        {{ $asset->code }}
+                                    </span>
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium gap-1
+                                        @if($asset->condition === 'bagus') bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300
+                                        @elseif($asset->condition === 'rusak ringan') bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300
+                                        @elseif($asset->condition === 'rusak sedang') bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300
+                                        @elseif($asset->condition === 'diperbaiki') bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300
+                                        @else bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300
+                                        @endif">
+                                        {{ ucfirst($asset->condition) }}
+                                    </span>
+                                </div>
+                                <h3 class="font-medium text-slate-900 dark:text-white truncate">{{ $asset->name }}</h3>
+                                @if($asset->brand)
+                                    <p class="text-xs text-slate-500 dark:text-slate-400">{{ $asset->brand }}</p>
+                                @endif
+                            </div>
+                            <div class="flex items-center gap-1 flex-shrink-0">
+                                <a href="{{ route('assets.show', $asset) }}" 
+                                   class="p-2 text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg transition">
+                                    <x-icon name="eye" class="w-4 h-4" />
+                                </a>
+                                <a href="{{ route('assets.edit', $asset) }}" 
+                                   class="p-2 text-slate-500 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/30 rounded-lg transition">
+                                    <x-icon name="edit" class="w-4 h-4" />
+                                </a>
+                                <form action="{{ route('assets.destroy', $asset) }}" method="POST" class="inline" onsubmit="return confirm('Yakin ingin menghapus asset ini?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="p-2 text-slate-500 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-lg transition">
+                                        <x-icon name="trash" class="w-4 h-4" />
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-3 pt-3 border-t border-slate-100 dark:border-slate-700">
+                            <span class="inline-flex items-center px-2 py-1 rounded-lg text-xs font-medium bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300">
+                                <x-icon name="category" class="w-3 h-3 mr-1" />
+                                {{ $asset->category->name }}
+                            </span>
+                            <span class="inline-flex items-center px-2 py-1 rounded-lg text-xs font-medium bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300">
+                                <x-icon name="location" class="w-3 h-3 mr-1" />
+                                {{ $asset->room->name }}
+                            </span>
+                        </div>
+                    </div>
+                @empty
+                    <div class="bg-white dark:bg-slate-800 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 p-8 text-center">
+                        <div class="w-16 h-16 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <x-icon name="assets" class="w-8 h-8 text-slate-400 dark:text-slate-500" />
+                        </div>
+                        <p class="text-slate-500 dark:text-slate-400 mb-2">Belum ada asset.</p>
+                        <a href="{{ route('assets.create') }}" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 font-medium">
+                            + Tambah asset pertama
+                        </a>
+                    </div>
+                @endforelse
+                
+                {{-- Mobile Pagination --}}
+                @if($assets->hasPages())
+                    <div class="mt-4">
+                        {{ $assets->withQueryString()->links() }}
+                    </div>
+                @endif
+            </div>
+
+            {{-- Desktop Table View --}}
+            <div class="hidden lg:block bg-white dark:bg-slate-800 overflow-hidden rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
                         <thead class="bg-slate-800 dark:bg-slate-900">
                             <tr>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Kode</th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Nama Asset</th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Kategori</th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Ruangan</th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Kondisi</th>
-                                <th class="px-6 py-4 text-center text-xs font-semibold text-white uppercase tracking-wider">Aksi</th>
+                                <th class="px-4 xl:px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Kode</th>
+                                <th class="px-4 xl:px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Nama Asset</th>
+                                <th class="px-4 xl:px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Kategori</th>
+                                <th class="px-4 xl:px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Ruangan</th>
+                                <th class="px-4 xl:px-6 py-3 text-left text-xs font-semibold text-white uppercase tracking-wider">Kondisi</th>
+                                <th class="px-4 xl:px-6 py-3 text-center text-xs font-semibold text-white uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white dark:bg-slate-800 divide-y divide-slate-100 dark:divide-slate-700">
                             @forelse ($assets as $asset)
                                 <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition">
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="text-sm font-mono font-semibold text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30 px-2 py-1 rounded">
+                                    <td class="px-4 xl:px-6 py-3 whitespace-nowrap">
+                                        <span class="text-xs font-mono font-semibold text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/30 px-2 py-1 rounded">
                                             {{ $asset->code }}
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-4 xl:px-6 py-3">
                                         <div class="text-sm font-medium text-slate-900 dark:text-white">{{ $asset->name }}</div>
                                         <div class="text-xs text-slate-500 dark:text-slate-400">{{ $asset->brand ?? '-' }}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300">
+                                    <td class="px-4 xl:px-6 py-3 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300">
                                             {{ $asset->category->name }}
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 gap-1">
+                                    <td class="px-4 xl:px-6 py-3 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 gap-1">
                                             <x-icon name="location" class="w-3 h-3" />
                                             {{ $asset->room->name }}
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium gap-1
+                                    <td class="px-4 xl:px-6 py-3 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium gap-1
                                             @if($asset->condition === 'bagus') bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300
                                             @elseif($asset->condition === 'rusak ringan') bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300
                                             @elseif($asset->condition === 'rusak sedang') bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300
@@ -162,15 +236,15 @@
                                             {{ ucfirst($asset->condition) }}
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <td class="px-4 xl:px-6 py-3 whitespace-nowrap text-center">
                                         <div class="flex items-center justify-center gap-1">
                                             <a href="{{ route('assets.show', $asset) }}" 
-                                               class="p-2 text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg transition"
+                                               class="p-1.5 text-slate-500 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/30 rounded-lg transition"
                                                title="Lihat Detail">
                                                 <x-icon name="eye" class="w-4 h-4" />
                                             </a>
                                             <a href="{{ route('assets.edit', $asset) }}" 
-                                               class="p-2 text-slate-500 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/30 rounded-lg transition"
+                                               class="p-1.5 text-slate-500 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/30 rounded-lg transition"
                                                title="Edit">
                                                 <x-icon name="edit" class="w-4 h-4" />
                                             </a>
@@ -178,7 +252,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" 
-                                                        class="p-2 text-slate-500 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-lg transition"
+                                                        class="p-1.5 text-slate-500 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-lg transition"
                                                         title="Hapus">
                                                     <x-icon name="trash" class="w-4 h-4" />
                                                 </button>
@@ -205,9 +279,9 @@
                     </table>
                 </div>
 
-                {{-- Pagination --}}
+                {{-- Desktop Pagination --}}
                 @if($assets->hasPages())
-                    <div class="px-6 py-4 border-t border-slate-100 dark:border-slate-700">
+                    <div class="px-4 xl:px-6 py-4 border-t border-slate-100 dark:border-slate-700">
                         {{ $assets->withQueryString()->links() }}
                     </div>
                 @endif
