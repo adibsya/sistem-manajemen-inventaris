@@ -40,9 +40,9 @@
                         @endisset
                         
                         {{-- Right Side Actions --}}
-                        <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-6">
                             {{-- Date (Hidden on smaller screens) --}}
-                            <div class="hidden xl:flex items-center">
+                            <div class="hidden xl:flex items-center ml-6">
                                 <span class="text-sm text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-700 px-3 py-1.5 rounded-lg whitespace-nowrap flex items-center gap-2">
                                     <x-icon name="calendar" class="w-4 h-4" />
                                     {{ now()->format('D, d M Y') }}
