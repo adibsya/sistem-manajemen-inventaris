@@ -60,7 +60,7 @@
                                 <p class="text-3xl font-bold">{{ $totalAssets }}</p>
                             </div>
                             <div class="bg-white/20 p-2 rounded-lg">
-                                <x-icon name="chart" class="w-5 h-5 text-white" />
+                                <x-icon name="dashboard" class="w-5 h-5 text-white" />
                             </div>
                         </div>
                     </div>
@@ -117,7 +117,7 @@
                 <div class="bg-white dark:bg-slate-800 rounded-3xl p-5 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-all group">
                     <div class="flex justify-between items-start mb-4">
                         <div class="p-3 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl text-indigo-500 group-hover:scale-110 transition-transform duration-300">
-                            <x-icon name="boxes" class="w-6 h-6" />
+                            <x-icon name="cube" class="w-6 h-6" />
                         </div>
                         <span class="text-xs font-bold px-2 py-1 bg-slate-50 dark:bg-slate-700 rounded-lg text-slate-500">Total</span>
                     </div>
