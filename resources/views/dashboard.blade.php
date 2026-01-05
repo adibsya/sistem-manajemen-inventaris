@@ -273,32 +273,61 @@
             {{-- Asset Rusak --}}
             @if($damagedAssets->count() > 0)
                 <div class="bg-white dark:bg-slate-800 overflow-hidden rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 mt-6">
-                    <div class="p-6">
+                    <div class="p-4 sm:p-6">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-bold text-rose-600 dark:text-rose-400 flex items-center">
+                            <h3 class="font-bold text-rose-600 dark:text-rose-400 flex items-center text-sm sm:text-base">
                                 <x-icon name="exclamation-triangle" class="w-5 h-5 mr-2" />
                                 Asset Perlu Perhatian
                             </h3>
                             <a href="{{ route('assets.index', ['condition' => 'rusak ringan']) }}" class="text-primary-600 dark:text-primary-400 text-sm hover:underline font-medium">Lihat semua</a>
                         </div>
-                        <div class="overflow-x-auto">
+                        
+                        {{-- Mobile Card View --}}
+                        <div class="sm:hidden space-y-3">
+                            @foreach($damagedAssets as $asset)
+                                <div class="bg-slate-50 dark:bg-slate-700/50 rounded-lg p-3">
+                                    <div class="flex items-start justify-between gap-2 mb-2">
+                                        <div class="min-w-0 flex-1">
+                                            <span class="text-xs font-mono text-slate-500 dark:text-slate-400">{{ $asset->code }}</span>
+                                            <p class="font-medium text-sm text-slate-800 dark:text-white truncate">{{ $asset->name }}</p>
+                                            <p class="text-xs text-slate-500 dark:text-slate-400">{{ $asset->room->name }}</p>
+                                        </div>
+                                        <span class="px-2 py-0.5 rounded-full text-xs font-medium flex-shrink-0
+                                            @if($asset->condition === 'rusak ringan') bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300
+                                            @elseif($asset->condition === 'rusak sedang') bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300
+                                            @else bg-rose-100 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300
+                                            @endif">
+                                            {{ ucfirst($asset->condition) }}
+                                        </span>
+                                    </div>
+                                    <a href="{{ route('damage-reports.create', ['asset_id' => $asset->id]) }}" 
+                                       class="inline-flex items-center px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-medium rounded-lg transition w-full justify-center">
+                                        <x-icon name="plus" class="w-3.5 h-3.5 mr-1" />
+                                        Buat Laporan
+                                    </a>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        {{-- Desktop Table View --}}
+                        <div class="hidden sm:block overflow-x-auto">
                             <table class="min-w-full">
                                 <thead>
                                     <tr class="bg-slate-800 dark:bg-slate-900 text-white">
-                                        <th class="px-4 py-3 text-left text-xs font-semibold uppercase rounded-tl-lg">Kode</th>
-                                        <th class="px-4 py-3 text-left text-xs font-semibold uppercase">Nama</th>
-                                        <th class="px-4 py-3 text-left text-xs font-semibold uppercase">Ruangan</th>
-                                        <th class="px-4 py-3 text-left text-xs font-semibold uppercase">Kondisi</th>
-                                        <th class="px-4 py-3 text-left text-xs font-semibold uppercase rounded-tr-lg">Aksi</th>
+                                        <th class="px-3 lg:px-4 py-3 text-left text-xs font-semibold uppercase rounded-tl-lg">Kode</th>
+                                        <th class="px-3 lg:px-4 py-3 text-left text-xs font-semibold uppercase">Nama</th>
+                                        <th class="px-3 lg:px-4 py-3 text-left text-xs font-semibold uppercase hidden md:table-cell">Ruangan</th>
+                                        <th class="px-3 lg:px-4 py-3 text-left text-xs font-semibold uppercase">Kondisi</th>
+                                        <th class="px-3 lg:px-4 py-3 text-left text-xs font-semibold uppercase rounded-tr-lg">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
                                     @foreach($damagedAssets as $asset)
                                         <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/50 transition">
-                                            <td class="px-4 py-3 text-sm font-mono text-slate-700 dark:text-slate-300">{{ $asset->code }}</td>
-                                            <td class="px-4 py-3 text-sm font-medium text-slate-800 dark:text-white">{{ $asset->name }}</td>
-                                            <td class="px-4 py-3 text-sm text-slate-600 dark:text-slate-400">{{ $asset->room->name }}</td>
-                                            <td class="px-4 py-3">
+                                            <td class="px-3 lg:px-4 py-3 text-xs font-mono text-slate-700 dark:text-slate-300">{{ $asset->code }}</td>
+                                            <td class="px-3 lg:px-4 py-3 text-sm font-medium text-slate-800 dark:text-white">{{ $asset->name }}</td>
+                                            <td class="px-3 lg:px-4 py-3 text-sm text-slate-600 dark:text-slate-400 hidden md:table-cell">{{ $asset->room->name }}</td>
+                                            <td class="px-3 lg:px-4 py-3">
                                                 <span class="px-2 py-1 rounded-full text-xs font-medium
                                                     @if($asset->condition === 'rusak ringan') bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300
                                                     @elseif($asset->condition === 'rusak sedang') bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300
@@ -307,11 +336,11 @@
                                                     {{ ucfirst($asset->condition) }}
                                                 </span>
                                             </td>
-                                            <td class="px-4 py-3">
+                                            <td class="px-3 lg:px-4 py-3">
                                                 <a href="{{ route('damage-reports.create', ['asset_id' => $asset->id]) }}" 
-                                                   class="inline-flex items-center px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-medium rounded-lg transition">
-                                                    <x-icon name="plus" class="w-3.5 h-3.5 mr-1" />
-                                                    Buat Laporan
+                                                   class="inline-flex items-center px-2 lg:px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white text-xs font-medium rounded-lg transition">
+                                                    <x-icon name="plus" class="w-3.5 h-3.5 lg:mr-1" />
+                                                    <span class="hidden lg:inline">Buat Laporan</span>
                                                 </a>
                                             </td>
                                         </tr>
