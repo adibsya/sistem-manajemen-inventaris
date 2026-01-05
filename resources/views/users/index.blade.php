@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             
             {{-- Action Button - Mobile View --}}
-            <div class="mb-4 px-4 sm:hidden">
+            <div class="mb-4 sm:hidden">
                 <a href="{{ route('users.create') }}" 
                    class="w-full inline-flex items-center justify-center px-4 py-2.5 bg-brand-blue hover:bg-brand-blue/90 text-white font-medium rounded-lg transition shadow-sm">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
