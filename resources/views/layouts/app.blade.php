@@ -22,7 +22,7 @@
             @include('layouts.sidebar')
             
             {{-- Main Content --}}
-            <div class="flex-1 flex flex-col min-h-screen lg:ml-64">
+            <div class="flex-1 flex flex-col min-h-screen lg:ml-72">
                 {{-- Top Bar --}}
                 <header class="bg-white dark:bg-slate-800 shadow-sm border-b border-slate-200 dark:border-slate-700 sticky top-0 z-30">
                     <div class="flex items-center justify-between px-4 py-3 sm:px-6 lg:px-8">

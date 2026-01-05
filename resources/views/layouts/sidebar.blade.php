@@ -29,7 +29,7 @@
     </div>
     
     {{-- Sidebar Navigation --}}
-    <nav class="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto scrollbar-thin">
+    <nav class="flex-1 px-4 py-6 space-y-1.5 overflow-y-auto scrollbar-hide">
         {{-- Dashboard --}}
         <a href="{{ route('dashboard') }}" 
            class="flex items-center gap-3.5 px-4 py-3 rounded-full font-medium transition-all group

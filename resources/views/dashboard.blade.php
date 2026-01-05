@@ -1,17 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center justify-between">
-            <div>
-                <h2 class="font-bold text-2xl text-primary-900 dark:text-white leading-tight font-display">
-                    Dashboard
-                </h2>
-                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Overview of your inventory status</p>
-            </div>
-            <div class="flex items-center gap-2">
-                <span class="text-xs font-medium px-3 py-1 bg-white dark:bg-slate-800 rounded-full text-slate-500 border border-slate-200 dark:border-slate-700 shadow-sm">
-                    {{ now()->format('d M Y') }}
-                </span>
-            </div>
+        <div>
+            <h2 class="font-bold text-2xl text-primary-900 dark:text-white leading-tight font-display">
+                Dashboard
+            </h2>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Overview of your inventory status</p>
         </div>
     </x-slot>
 
