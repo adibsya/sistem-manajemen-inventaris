@@ -8,13 +8,13 @@
         </div>
     </x-slot>
 
-    <div class="py-6 lg:py-8">
+    <div class="py-4 sm:py-6 lg:py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             {{-- Charts & Activity Row --}}
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
                 {{-- Main Chart --}}
-                <div class="lg:col-span-2 bg-white dark:bg-slate-800 rounded-3xl shadow-[0_2px_20px_-4px_rgba(0,0,0,0.05)] border border-slate-100 dark:border-slate-700 p-6">
+                <div class="lg:col-span-2 bg-white dark:bg-slate-800 rounded-2xl sm:rounded-3xl shadow-[0_2px_20px_-4px_rgba(0,0,0,0.05)] border border-slate-100 dark:border-slate-700 p-4 sm:p-6">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="font-bold text-slate-800 dark:text-white text-lg">Inventory Statistics</h3>
                         <select class="text-xs border-none bg-slate-50 dark:bg-slate-900 rounded-lg text-slate-500 focus:ring-0 cursor-pointer">
@@ -22,13 +22,13 @@
                             <option>This Month</option>
                         </select>
                     </div>
-                    <div class="h-[250px] w-full">
+                    <div class="h-[200px] sm:h-[250px] w-full">
                         <canvas id="inventoryChart"></canvas>
                     </div>
                 </div>
 
                 {{-- Recent Activity / Quick Actions --}}
-                <div class="bg-primary-600 dark:bg-slate-800 rounded-3xl shadow-xl shadow-primary-900/10 dark:shadow-none p-6 text-white flex flex-col justify-between overflow-hidden relative">
+                <div class="bg-primary-600 dark:bg-slate-800 rounded-2xl sm:rounded-3xl shadow-xl shadow-primary-900/10 dark:shadow-none p-4 sm:p-6 text-white flex flex-col justify-between overflow-hidden relative min-h-[280px] sm:min-h-0">
                     {{-- Decorative Circle --}}
                     <div class="absolute -top-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
                     <div class="absolute bottom-0 right-0 w-32 h-32 bg-primary-500/50 rounded-full blur-xl"></div>
@@ -70,9 +70,9 @@
             <h3 class="font-bold text-slate-800 dark:text-white text-xl mb-6 px-1">Overview Status</h3>
 
             {{-- Statistik Cards --}}
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-10">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 mb-6 sm:mb-10">
                 {{-- Laporan Pending --}}
-                <div class="bg-white dark:bg-slate-800 rounded-3xl p-5 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-all group">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-all group">
                     <div class="flex justify-between items-start mb-4">
                         <div class="p-3 bg-amber-50 dark:bg-amber-900/20 rounded-2xl text-amber-500 group-hover:scale-110 transition-transform duration-300">
                             <x-icon name="clock" class="w-6 h-6" />
@@ -86,7 +86,7 @@
                 </div>
 
                 {{-- Sedang Diperbaiki --}}
-                <div class="bg-white dark:bg-slate-800 rounded-3xl p-5 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-all group">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-all group">
                     <div class="flex justify-between items-start mb-4">
                         <div class="p-3 bg-primary-50 dark:bg-primary-900/20 rounded-2xl text-primary-500 group-hover:scale-110 transition-transform duration-300">
                             <x-icon name="maintenance" class="w-6 h-6" />
@@ -100,7 +100,7 @@
                 </div>
 
                 {{-- Total Biaya --}}
-                <div class="bg-white dark:bg-slate-800 rounded-3xl p-5 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-all group">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-all group">
                     <div class="flex justify-between items-start mb-4">
                         <div class="p-3 bg-emerald-50 dark:bg-emerald-900/20 rounded-2xl text-emerald-500 group-hover:scale-110 transition-transform duration-300">
                             <x-icon name="currency" class="w-6 h-6" />
@@ -114,7 +114,7 @@
                 </div>
 
                 {{-- Total Assets (Mini) --}}
-                <div class="bg-white dark:bg-slate-800 rounded-3xl p-5 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-all group">
+                <div class="bg-white dark:bg-slate-800 rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-slate-100 dark:border-slate-700 shadow-sm hover:shadow-md transition-all group">
                     <div class="flex justify-between items-start mb-4">
                         <div class="p-3 bg-indigo-50 dark:bg-indigo-900/20 rounded-2xl text-indigo-500 group-hover:scale-110 transition-transform duration-300">
                             <x-icon name="cube" class="w-6 h-6" />
