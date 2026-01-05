@@ -129,8 +129,8 @@
             </div>
 
             {{-- Recent Activity Table --}}
-            <div class="bg-white dark:bg-slate-800 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
-                <div class="p-6 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
+            <div class="bg-white dark:bg-slate-800 rounded-2xl sm:rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700 overflow-hidden">
+                <div class="p-4 sm:p-6 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
                     <h3 class="font-bold text-slate-800 dark:text-white">Recent Maintenance</h3>
                     <a href="{{ route('maintenance-logs.index') }}" class="text-sm text-primary-600 font-medium hover:text-primary-700">View All</a>
                 </div>
@@ -138,24 +138,24 @@
                     <table class="w-full text-left text-sm text-slate-600 dark:text-slate-400">
                         <thead class="bg-slate-50 dark:bg-slate-700/50 text-xs uppercase font-semibold text-slate-500">
                             <tr>
-                                <th class="px-6 py-4">Asset Name</th>
-                                <th class="px-6 py-4">Technician</th>
-                                <th class="px-6 py-4">Date</th>
-                                <th class="px-6 py-4">Cost</th>
-                                <th class="px-6 py-4">Status</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4">Asset Name</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 hidden md:table-cell">Technician</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 hidden sm:table-cell">Date</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4">Cost</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 hidden lg:table-cell">Status</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 dark:divide-slate-700">
                             @forelse($latestMaintenanceLogs as $log)
                                 <tr class="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition">
-                                    <td class="px-6 py-4 font-medium text-slate-900 dark:text-white">
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4 font-medium text-slate-900 dark:text-white">
                                         {{ $log->asset->name }}
                                         <div class="text-xs text-slate-400 font-normal">{{ $log->asset->code }}</div>
                                     </td>
-                                    <td class="px-6 py-4">{{ $log->technician }}</td>
-                                    <td class="px-6 py-4">{{ $log->completion_date ? \Carbon\Carbon::parse($log->completion_date)->format('d M Y') : '-' }}</td>
-                                    <td class="px-6 py-4 font-medium">Rp {{ number_format($log->cost, 0, ',', '.') }}</td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4 hidden md:table-cell">{{ $log->technician }}</td>
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4 hidden sm:table-cell">{{ $log->completion_date ? \Carbon\Carbon::parse($log->completion_date)->format('d M Y') : '-' }}</td>
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4 font-medium text-sm">Rp {{ number_format($log->cost, 0, ',', '.') }}</td>
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4 hidden lg:table-cell">
                                         <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">Completed</span>
                                     </td>
                                 </tr>
