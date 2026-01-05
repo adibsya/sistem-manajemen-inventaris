@@ -1,12 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <div>
-                <h2 class="font-bold text-xl text-brand-blue leading-tight">
-                    🚪 Daftar Ruangan
-                </h2>
-                <p class="text-sm text-gray-500 mt-1">Kelola lokasi penempatan asset</p>
-            </div>
+            <h2 class="font-bold text-xl text-brand-blue leading-tight">
+                🚪 Daftar Ruangan
+            </h2>
             <a href="{{ route('rooms.create') }}" 
                class="inline-flex items-center px-4 py-2.5 bg-brand-blue hover:bg-brand-blue/90 text-white font-medium rounded-lg transition shadow-sm">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">

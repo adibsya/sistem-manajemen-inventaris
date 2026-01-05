@@ -1,13 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
-            <div>
-                <h2 class="font-bold text-xl text-slate-800 dark:text-white leading-tight flex items-center gap-2">
-                    <x-icon name="assets" class="w-6 h-6 text-primary-600 dark:text-primary-400" />
-                    Daftar Asset
-                </h2>
-                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Kelola semua inventaris asset</p>
-            </div>
+            <h2 class="font-bold text-xl text-slate-800 dark:text-white leading-tight flex items-center gap-2">
+                <x-icon name="assets" class="w-6 h-6 text-primary-600 dark:text-primary-400" />
+                Daftar Asset
+            </h2>
             @if(Auth::user()->isAdmin() || Auth::user()->isTeknisi())
                 <div class="flex gap-2 sm:gap-3">
                     <a href="{{ route('assets.export.pdf', request()->query()) }}" 
