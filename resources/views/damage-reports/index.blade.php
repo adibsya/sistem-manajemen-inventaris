@@ -1,12 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <div>
-                <h2 class="font-bold text-xl text-brand-blue leading-tight">
-                    ⚠️ Laporan Kerusakan
-                </h2>
-                <p class="text-sm text-gray-500 mt-1">Kelola laporan kerusakan asset</p>
-            </div>
+            <h2 class="font-bold text-xl text-brand-blue leading-tight">
+                ⚠️ Laporan Kerusakan
+            </h2>
             <div class="flex gap-3">
                 @if(Auth::user()->isAdmin() || Auth::user()->isTeknisi())
                     <a href="{{ route('damage-reports.export.pdf', request()->query()) }}" 

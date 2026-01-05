@@ -1,12 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
-            <div>
-                <h2 class="font-bold text-xl text-brand-blue leading-tight">
-                    🔧 Riwayat Perbaikan
-                </h2>
-                <p class="text-sm text-gray-500 mt-1">Log perbaikan dan biaya maintenance asset</p>
-            </div>
+            <h2 class="font-bold text-xl text-brand-blue leading-tight">
+                🔧 Riwayat Perbaikan
+            </h2>
             <div class="flex gap-3">
                 <a href="{{ route('maintenance-logs.export.pdf', request()->query()) }}" 
                    class="inline-flex items-center px-4 py-2.5 bg-brand-blue hover:bg-brand-blue/90 text-white font-medium rounded-lg transition shadow-sm">
