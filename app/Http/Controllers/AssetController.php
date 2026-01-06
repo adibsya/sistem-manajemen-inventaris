@@ -100,6 +100,9 @@ class AssetController extends Controller
         // Simpan ke database
         Asset::create($validated);
 
+        // Clear dashboard cache
+        \App\Http\Controllers\DashboardController::clearCache();
+
         // Redirect dengan pesan sukses
         return redirect()->route('assets.index')
             ->with('success', 'Asset berhasil ditambahkan!');
@@ -158,6 +161,9 @@ class AssetController extends Controller
         // Update di database
         $asset->update($validated);
 
+        // Clear dashboard cache
+        \App\Http\Controllers\DashboardController::clearCache();
+
         // Redirect dengan pesan sukses
         return redirect()->route('assets.index')
             ->with('success', 'Asset berhasil diperbarui!');
@@ -171,6 +177,9 @@ class AssetController extends Controller
     {
         // Hapus asset
         $asset->delete();
+
+        // Clear dashboard cache
+        \App\Http\Controllers\DashboardController::clearCache();
 
         // Redirect dengan pesan sukses
         return redirect()->route('assets.index')

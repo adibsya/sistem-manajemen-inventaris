@@ -6,24 +6,7 @@
     </x-slot>
 
     <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            
-            {{-- Action Buttons - Mobile View --}}
-            <div class="flex gap-2 mb-4 sm:hidden">
-                @if(Auth::user()->isAdmin() || Auth::user()->isTeknisi())
-                    <a href="{{ route('damage-reports.export.pdf', request()->query()) }}" 
-                       class="flex-1 inline-flex items-center justify-center px-3 py-2.5 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition shadow-sm text-sm">
-                        <x-icon name="download" class="w-4 h-4 mr-2" />
-                        Export PDF
-                    </a>
-                @endif
-                <a href="{{ route('damage-reports.create') }}" 
-                   class="flex-1 inline-flex items-center justify-center px-3 py-2.5 bg-brand-red hover:bg-brand-red/90 text-white font-medium rounded-lg transition shadow-sm text-sm">
-                    <x-icon name="plus" class="w-4 h-4 mr-2" />
-                    Buat Laporan
-                </a>
-            </div>
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
             @if (session('success'))
                 <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl mb-6 flex items-center">
@@ -84,28 +67,28 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-brand-red">
                             <tr>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Tanggal</th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Asset</th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Pelapor</th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Deskripsi</th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Status</th>
-                                <th class="px-6 py-4 text-center text-xs font-semibold text-white uppercase tracking-wider">Aksi</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Tanggal</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Asset</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-white uppercase tracking-wider hidden md:table-cell">Pelapor</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-white uppercase tracking-wider hidden lg:table-cell">Deskripsi</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Status</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 text-center text-xs font-semibold text-white uppercase tracking-wider hidden sm:table-cell">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-100">
                             @forelse ($damageReports as $report)
                                 <tr class="hover:bg-gray-50 transition">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
-                                        <div class="font-medium">{{ $report->created_at->format('d M Y') }}</div>
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4 text-sm text-gray-700">
+                                        <div class="font-medium text-xs sm:text-sm">{{ $report->created_at->format('d M Y') }}</div>
                                         <div class="text-xs text-gray-400">{{ $report->created_at->format('H:i') }}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <div class="text-sm font-medium text-gray-900">{{ $report->asset->name }}</div>
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4">
+                                        <div class="text-xs sm:text-sm font-medium text-gray-900">{{ $report->asset->name }}</div>
                                         <span class="text-xs font-mono text-brand-blue bg-brand-blue/10 px-1.5 py-0.5 rounded">
                                             {{ $report->asset->code }}
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4 hidden md:table-cell">
                                         <div class="flex items-center">
                                             <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-xs font-medium text-gray-600 mr-2">
                                                 {{ substr($report->user->name, 0, 1) }}
@@ -113,10 +96,10 @@
                                             <span class="text-sm text-gray-700">{{ $report->user->name }}</span>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4 text-sm text-gray-700 max-w-xs">
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4 text-sm text-gray-700 max-w-xs hidden lg:table-cell">
                                         <p class="truncate">{{ Str::limit($report->description, 50) }}</p>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4">
                                         <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium
                                             @if($report->status === 'pending') bg-brand-yellow/20 text-yellow-700
                                             @elseif($report->status === 'process') bg-blue-100 text-blue-700
@@ -128,10 +111,10 @@
                                             @elseif($report->status === 'fixed') ✓
                                             @else ✕
                                             @endif
-                                            {{ ucfirst($report->status) }}
+                                            <span class="hidden sm:inline ml-1">{{ ucfirst($report->status) }}</span>
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4 text-center hidden sm:table-cell">
                                         <div class="flex items-center justify-center gap-2">
                                             <a href="{{ route('damage-reports.show', $report) }}" 
                                                class="p-2 text-gray-500 hover:text-brand-blue hover:bg-brand-blue/10 rounded-lg transition"
@@ -152,7 +135,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" 
-                                                        class="p-2 text-gray-500 hover:text-brand-red hover:bg-brand-red/10 rounded-lg transition"
+                                                        class="p-2 text-red-600 hover:text-white hover:bg-red-600 rounded-lg transition"
                                                         title="Hapus">
                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
@@ -188,6 +171,24 @@
                     </div>
                 @endif
             </div>
+        </div>
+    </div>
+
+    {{-- Action Buttons - Mobile View (Bottom) --}}
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6 sm:hidden">
+        <div class="flex gap-2">
+            @if(Auth::user()->isAdmin() || Auth::user()->isTeknisi())
+                <a href="{{ route('damage-reports.export.pdf', request()->query()) }}" 
+                   class="flex-1 inline-flex items-center justify-center px-3 py-3 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition shadow-lg text-sm">
+                    <x-icon name="download" class="w-5 h-5 mr-2" />
+                    Export PDF
+                </a>
+            @endif
+            <a href="{{ route('damage-reports.create') }}" 
+               class="flex-1 inline-flex items-center justify-center px-3 py-3 bg-brand-red hover:bg-brand-red/90 text-white font-semibold rounded-lg transition shadow-lg text-sm">
+                <x-icon name="plus" class="w-5 h-5 mr-2" />
+                Buat Laporan
+            </a>
         </div>
     </div>
 </x-app-layout>

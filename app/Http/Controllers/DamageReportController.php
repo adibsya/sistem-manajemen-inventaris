@@ -87,6 +87,9 @@ class DamageReportController extends Controller
             'status' => 'pending',
         ]);
 
+        // Clear dashboard cache
+        \App\Http\Controllers\DashboardController::clearCache();
+
         return redirect()->route('damage-reports.index')
             ->with('success', 'Laporan kerusakan berhasil dibuat!');
     }

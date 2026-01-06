@@ -6,18 +6,8 @@
     </x-slot>
 
     <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            {{-- Action Button - Mobile View --}}
-            <div class="mb-4 sm:hidden">
-                <a href="{{ route('categories.create') }}" 
-                   class="w-full inline-flex items-center justify-center px-4 py-2.5 bg-brand-blue hover:bg-brand-blue/90 text-white font-medium rounded-lg transition shadow-sm">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
-                    Tambah Kategori
-                </a>
-            </div>
 
             {{-- Tabel Kategori --}}
             <div class="bg-white overflow-hidden rounded-xl shadow-sm">
@@ -25,19 +15,19 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-brand-blue">
                             <tr>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider w-16">No</th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Nama Kategori</th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Jumlah Asset</th>
-                                <th class="px-6 py-4 text-center text-xs font-semibold text-white uppercase tracking-wider w-32">Aksi</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-white uppercase tracking-wider w-16 hidden sm:table-cell">No</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Nama Kategori</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Jumlah Asset</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 text-center text-xs font-semibold text-white uppercase tracking-wider w-32">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-100">
                             @forelse ($categories as $index => $category)
                                 <tr class="hover:bg-gray-50 transition">
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4 text-sm text-gray-500 hidden sm:table-cell">
                                         {{ $index + 1 }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4">
                                         <div class="flex items-center gap-3">
                                             <div class="w-10 h-10 bg-brand-blue/10 rounded-lg flex items-center justify-center">
                                                 <span class="text-lg">🏷️</span>
@@ -45,12 +35,12 @@
                                             <span class="text-sm font-semibold text-gray-900">{{ $category->name }}</span>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4">
                                         <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-brand-blue/10 text-brand-blue">
                                             📦 {{ $category->assets_count }} asset
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4 text-center">
                                         <div class="flex items-center justify-center gap-1">
                                             {{-- Tombol Lihat --}}
                                             <a href="{{ route('categories.show', $category) }}" 
@@ -79,7 +69,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" 
-                                                        class="p-2 text-gray-500 hover:text-brand-red hover:bg-brand-red/10 rounded-lg transition"
+                                                        class="p-2 text-red-600 hover:text-white hover:bg-red-600 rounded-lg transition"
                                                         title="Hapus">
                                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
@@ -107,6 +97,17 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+
+            {{-- Action Button - Mobile View (Bottom) --}}
+            <div class="mt-4 sm:hidden">
+                <a href="{{ route('categories.create') }}" 
+                   class="w-full inline-flex items-center justify-center px-4 py-3 bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold rounded-lg transition shadow-lg">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    Tambah Kategori
+                </a>
             </div>
         </div>
     </div>

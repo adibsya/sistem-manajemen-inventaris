@@ -6,18 +6,8 @@
     </x-slot>
 
     <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            
-            {{-- Action Button - Mobile View --}}
-            <div class="mb-4 sm:hidden">
-                <a href="{{ route('users.create') }}" 
-                   class="w-full inline-flex items-center justify-center px-4 py-2.5 bg-brand-blue hover:bg-brand-blue/90 text-white font-medium rounded-lg transition shadow-sm">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
-                    </svg>
-                    Tambah User
-                </a>
-            </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
             
             @if (session('success'))
                 <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl mb-6 flex items-center">
@@ -80,17 +70,17 @@
                     <table class="min-w-full divide-y divide-gray-200">
                         <thead class="bg-brand-blue">
                             <tr>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">User</th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Email</th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Role</th>
-                                <th class="px-6 py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Bergabung</th>
-                                <th class="px-6 py-4 text-center text-xs font-semibold text-white uppercase tracking-wider">Aksi</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">User</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-white uppercase tracking-wider hidden md:table-cell">Email</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-white uppercase tracking-wider">Role</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 text-left text-xs font-semibold text-white uppercase tracking-wider hidden lg:table-cell">Bergabung</th>
+                                <th class="px-3 sm:px-6 py-3 sm:py-4 text-center text-xs font-semibold text-white uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-100">
                             @forelse ($users as $user)
                                 <tr class="hover:bg-gray-50 transition">
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4">
                                         <div class="flex items-center">
                                             <div class="h-10 w-10 rounded-full flex items-center justify-center text-white font-medium
                                                 @if($user->role === 'admin') bg-purple-500
@@ -107,10 +97,10 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4 text-sm text-gray-600 hidden md:table-cell">
                                         {{ $user->email }}
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4">
                                         <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium
                                             @if($user->role === 'admin') bg-purple-100 text-purple-700
                                             @elseif($user->role === 'teknisi') bg-brand-blue/10 text-brand-blue
@@ -123,11 +113,11 @@
                                             {{ ucfirst($user->role) }}
                                         </span>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4 text-sm text-gray-600 hidden lg:table-cell">
                                         <div>{{ $user->created_at->format('d M Y') }}</div>
                                         <div class="text-xs text-gray-400">{{ $user->created_at->diffForHumans() }}</div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap text-center">
+                                    <td class="px-3 sm:px-6 py-3 sm:py-4 text-center">
                                         <div class="flex items-center justify-center gap-2">
                                             <a href="{{ route('users.edit', $user) }}" 
                                                class="p-2 text-gray-500 hover:text-brand-yellow hover:bg-brand-yellow/10 rounded-lg transition"
@@ -141,7 +131,7 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" 
-                                                            class="p-2 text-gray-500 hover:text-brand-red hover:bg-brand-red/10 rounded-lg transition"
+                                                            class="p-2 text-red-600 hover:text-white hover:bg-red-600 rounded-lg transition"
                                                             title="Hapus">
                                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
@@ -177,6 +167,17 @@
                         {{ $users->links() }}
                     </div>
                 @endif
+            </div>
+
+            {{-- Action Button - Mobile View (Bottom) --}}
+            <div class="mt-4 sm:hidden">
+                <a href="{{ route('users.create') }}" 
+                   class="w-full inline-flex items-center justify-center px-4 py-3 bg-brand-blue hover:bg-brand-blue/90 text-white font-semibold rounded-lg transition shadow-lg">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                    Tambah User
+                </a>
             </div>
         </div>
     </div>

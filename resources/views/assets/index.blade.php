@@ -8,22 +8,7 @@
 
     <div class="py-4 sm:py-6 lg:py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            @if(Auth::user()->isAdmin() || Auth::user()->isTeknisi())
-                {{-- Action Buttons - Visible on Mobile --}}
-                <div class="flex gap-2 mb-4 sm:hidden">
-                    <a href="{{ route('assets.export.pdf', request()->query()) }}" 
-                       class="flex-1 inline-flex items-center justify-center px-3 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition shadow-sm text-sm">
-                        <x-icon name="download" class="w-4 h-4 mr-2" />
-                        Export PDF
-                    </a>
-                    <a href="{{ route('assets.create') }}" 
-                       class="flex-1 inline-flex items-center justify-center px-3 py-2.5 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition shadow-sm text-sm">
-                        <x-icon name="plus" class="w-4 h-4 mr-2" />
-                        Tambah Asset
-                    </a>
-                </div>
-            @endif
+
             
             {{-- Flash Message Sukses --}}
             @if (session('success'))
@@ -249,7 +234,7 @@
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" 
-                                                        class="p-1.5 text-slate-500 dark:text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-lg transition"
+                                                        class="p-2 text-red-600 hover:text-white hover:bg-red-600 rounded-lg transition"
                                                         title="Hapus">
                                                     <x-icon name="trash" class="w-4 h-4" />
                                                 </button>
@@ -285,4 +270,22 @@
             </div>
         </div>
     </div>
+
+    @if(Auth::user()->isAdmin() || Auth::user()->isTeknisi())
+        {{-- Action Buttons - Mobile View (Bottom) --}}
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6 sm:hidden">
+            <div class="flex gap-2">
+                <a href="{{ route('assets.export.pdf', request()->query()) }}" 
+                   class="flex-1 inline-flex items-center justify-center px-3 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition shadow-lg text-sm">
+                    <x-icon name="download" class="w-5 h-5 mr-2" />
+                    Export PDF
+                </a>
+                <a href="{{ route('assets.create') }}" 
+                   class="flex-1 inline-flex items-center justify-center px-3 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition shadow-lg text-sm">
+                    <x-icon name="plus" class="w-5 h-5 mr-2" />
+                    Tambah Asset
+                </a>
+            </div>
+        </div>
+    @endif
 </x-app-layout>
